@@ -1,0 +1,25 @@
+{
+  "name": "AgentPulseMonitor Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "agentpulsemonitor-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "AgentPulseMonitor Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { monitor_status: \"Running\", agent: \"AgentPulseMonitor\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "AgentPulseMonitor Processor"
+    ]
+  }
+}

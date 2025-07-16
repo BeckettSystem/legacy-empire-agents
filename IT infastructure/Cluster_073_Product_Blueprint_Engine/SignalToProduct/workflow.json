@@ -1,0 +1,25 @@
+{
+  "name": "SignalToProduct Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "signaltoproduct-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SignalToProduct Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_generated: true, agent: \"SignalToProduct\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SignalToProduct Processor"
+    ]
+  }
+}

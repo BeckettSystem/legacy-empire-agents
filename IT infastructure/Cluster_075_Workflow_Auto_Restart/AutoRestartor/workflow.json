@@ -1,0 +1,1 @@
+{"name": "AutoRestartor - Scroll Recovery Logic", "trigger": {"type": "webhook", "event": "scroll_failure"}, "actions": [{"name": "Attempt_Restart", "function": "scroll_stub.run", "inputs": {"scroll_id": "{{scroll_id}}", "trigger_payload": "{{trigger_payload}}"}}], "fallback": {"on_fail": {"notify": ["Valor", "Pulse"], "log_to": "scroll_attempt_log.json"}}}

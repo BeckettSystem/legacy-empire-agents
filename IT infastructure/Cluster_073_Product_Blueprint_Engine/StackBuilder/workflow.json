@@ -1,0 +1,25 @@
+{
+  "name": "StackBuilder Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "stackbuilder-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "StackBuilder Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_generated: true, agent: \"StackBuilder\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "StackBuilder Processor"
+    ]
+  }
+}

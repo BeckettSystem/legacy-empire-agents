@@ -1,0 +1,25 @@
+{
+  "name": "DriftScanner Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "driftscanner-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DriftScanner Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { monitor_status: \"Running\", agent: \"DriftScanner\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DriftScanner Processor"
+    ]
+  }
+}

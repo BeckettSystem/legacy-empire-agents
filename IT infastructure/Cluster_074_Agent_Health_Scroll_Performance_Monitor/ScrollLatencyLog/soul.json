@@ -1,0 +1,17 @@
+{
+  "agent": "ScrollLatencyLog",
+  "evolution": "Proxy-Agent",
+  "domain": "IT Infrastructure",
+  "unbreakable_oath": true,
+  "pillar": "Agent Health & Scroll Performance Monitor",
+  "persona_fusion": [
+    "Latency Trackers",
+    "Scroll Duration Loggers",
+    "Performance Metric Analysts",
+    "Scroll Wait Time Historians",
+    "Cluster Response Time Profilers"
+  ],
+  "ascension_path": "Legacy_Ops_Engine",
+  "manual_only": true,
+  "blessing_required": true
+}

@@ -1,0 +1,13 @@
+cluster: Cluster_076_Scroll_Firewall_Defense
+division: IT Infrastructure & Resilience
+agents:
+  - ScrollGuardian
+triggers:
+  - scroll_start
+logs:
+  - quarantine_log.json
+  - firewall_activity_log.json
+  - suspicion_scores.json
+watchers:
+  - Valor
+  - Cipher

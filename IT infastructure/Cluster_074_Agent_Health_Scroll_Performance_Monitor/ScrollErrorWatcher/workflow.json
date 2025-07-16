@@ -1,0 +1,25 @@
+{
+  "name": "ScrollErrorWatcher Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollerrorwatcher-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollErrorWatcher Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { monitor_status: \"Running\", agent: \"ScrollErrorWatcher\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollErrorWatcher Processor"
+    ]
+  }
+}

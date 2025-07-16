@@ -1,0 +1,25 @@
+{
+  "name": "RevenueModeler Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "revenuemodeler-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RevenueModeler Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_generated: true, agent: \"RevenueModeler\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RevenueModeler Processor"
+    ]
+  }
+}

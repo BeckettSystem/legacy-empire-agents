@@ -1,0 +1,13 @@
+cluster: Cluster_075_Workflow_Auto_Restart
+division: IT Infrastructure & Resilience
+agents:
+  - AutoRestartor
+triggers:
+  - scroll_failure
+logs:
+  - scroll_attempt_log.json
+  - recovery_log.json
+  - latency_metrics.json
+watchers:
+  - Valor
+  - Pulse
