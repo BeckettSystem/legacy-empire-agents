@@ -1,0 +1,25 @@
+{
+  "name": "OpCode Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "opcode-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "OpCode Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nconst agreement = $json.op_agreement || '';\nconst findings = [];\nif (!agreement.includes('voting rights')) findings.push('Missing voting rights definition');\nif (!agreement.includes('dissolution')) findings.push('No dissolution clause');\nif (!agreement.includes('management structure')) findings.push('No management hierarchy defined');\nreturn { findings, risk_score: findings.length * 25, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "OpCode Analyzer"
+    ]
+  }
+}

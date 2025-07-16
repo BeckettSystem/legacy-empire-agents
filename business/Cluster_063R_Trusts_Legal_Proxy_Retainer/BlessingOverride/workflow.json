@@ -1,0 +1,25 @@
+{
+  "name": "BlessingOverride Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "blessingoverride-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "BlessingOverride Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"BlessingOverride\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "BlessingOverride Processor"
+    ]
+  }
+}

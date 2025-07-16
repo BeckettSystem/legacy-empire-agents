@@ -1,0 +1,25 @@
+{
+  "name": "TrademarkVault Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "trademarkvault-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "TrademarkVault Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { ip_protection_scroll_ready: true, agent: \"TrademarkVault\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "TrademarkVault Processor"
+    ]
+  }
+}

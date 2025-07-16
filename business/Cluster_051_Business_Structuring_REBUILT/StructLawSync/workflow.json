@@ -1,0 +1,25 @@
+{
+  "name": "StructLawSync Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "structlawsync-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "StructLawSync Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nreturn { message: \"Filing sync initiated. Logs updated for legal integration.\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "StructLawSync Analyzer"
+    ]
+  }
+}

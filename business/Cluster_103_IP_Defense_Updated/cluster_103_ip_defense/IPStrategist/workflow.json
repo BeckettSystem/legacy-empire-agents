@@ -1,0 +1,14 @@
+{
+  "agent": "IPStrategist",
+  "type": "ip_unification_and_enforcement",
+  "integration_hooks": [
+    "ScrollShield",
+    "EscalationLogix",
+    "ChainOfTruth",
+    "CopyrightStrike",
+    "PatentForge",
+    "BrandSeal"
+  ],
+  "retainer_safe": true,
+  "venture_tagged": true
+}

@@ -1,0 +1,25 @@
+{
+  "name": "EntityForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "entityforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "EntityForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst scenario = $json.scenario || 'generic';\nconst options = ['LLC', 'S-Corp', 'C-Corp', 'Partnership'];\nlet recommendation = 'LLC';\nif (scenario.includes('investors')) recommendation = 'S-Corp';\nif (scenario.includes('scale')) recommendation = 'C-Corp';\nreturn { recommended_entity: recommendation, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "EntityForge Processor"
+    ]
+  }
+}

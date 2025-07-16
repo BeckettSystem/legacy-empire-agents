@@ -1,0 +1,25 @@
+{
+  "name": "EINWizard Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "einwizard-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "EINWizard Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  responsible_party: $json.owner || 'TBD',\n  entity_type: $json.type || 'LLC',\n  naics_code: $json.naics || '541611',\n  reason: $json.reason || 'Start new business',\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "EINWizard Processor"
+    ]
+  }
+}

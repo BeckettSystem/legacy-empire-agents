@@ -1,0 +1,25 @@
+{
+  "name": "NonCompGuard Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "noncompguard-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "NonCompGuard Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nconst text = $json.document || '';\nlet flags = [];\nif (text.includes('non-compete') && !text.includes('state of')) {\n  flags.push('Missing jurisdiction anchor');\n}\nif (!text.includes('consideration')) {\n  flags.push('No consideration clause for NDA');\n}\nreturn {\n  risk_flags: flags,\n  jurisdiction_risk: flags.length * 20,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "NonCompGuard Analyzer"
+    ]
+  }
+}

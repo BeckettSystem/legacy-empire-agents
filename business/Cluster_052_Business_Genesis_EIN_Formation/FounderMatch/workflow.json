@@ -1,0 +1,25 @@
+{
+  "name": "FounderMatch Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "foundermatch-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "FounderMatch Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst founders = $json.founders || [];\nlet issues = founders.length < 2 ? ['Solo founder'] : [];\nreturn { issues, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "FounderMatch Processor"
+    ]
+  }
+}

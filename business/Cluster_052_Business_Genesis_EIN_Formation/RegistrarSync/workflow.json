@@ -1,0 +1,25 @@
+{
+  "name": "RegistrarSync Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "registrarsync-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RegistrarSync Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  log_status: \"Formation scroll created. Awaiting filing release.\",\n  sync_ready: true,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RegistrarSync Processor"
+    ]
+  }
+}

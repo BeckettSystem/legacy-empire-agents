@@ -1,0 +1,25 @@
+{
+  "name": "DisputeForeshadow Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "disputeforeshadow-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DisputeForeshadow Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nconst text = $json.contract_text || '';\nconst red_flags = [];\nif (text.includes('in perpetuity')) red_flags.push('Unbounded term');\nif (text.includes('sole discretion')) red_flags.push('One-sided control');\nreturn { dispute_risks: red_flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DisputeForeshadow Analyzer"
+    ]
+  }
+}

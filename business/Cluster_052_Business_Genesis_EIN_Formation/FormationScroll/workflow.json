@@ -1,0 +1,25 @@
+{
+  "name": "FormationScroll Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "formationscroll-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "FormationScroll Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  articles_of_org: \"Prepared draft for LLC with flexible management.\",\n  operating_agreement: \"Base template generated.\",\n  disclaimers: [\"Blessing required before submission.\"],\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "FormationScroll Processor"
+    ]
+  }
+}

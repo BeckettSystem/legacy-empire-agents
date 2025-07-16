@@ -1,0 +1,25 @@
+{
+  "name": "JVStructor Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "jvstructor-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "JVStructor Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nconst doc = $json.jv_text || '';\nconst flags = [];\nif (!doc.includes('exit strategy')) flags.push('Missing exit clause');\nif (!doc.includes('capital contribution')) flags.push('Unclear equity input');\nif (!doc.includes('dispute resolution')) flags.push('No conflict resolution path');\nconst risk_weight = flags.length * 20;\nreturn { flags, risk_weight, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "JVStructor Analyzer"
+    ]
+  }
+}

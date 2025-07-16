@@ -1,0 +1,25 @@
+{
+  "name": "StakeBalancer Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "stakebalancer-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "StakeBalancer Analyzer",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) { throw new Error(\"Patriarch blessing required.\"); }\nconst structure = $json.structure || '';\nlet imbalance = structure.includes('preferred shares') && !structure.includes('equal vote');\nreturn { imbalance_detected: imbalance, severity: imbalance ? \"High\" : \"Low\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "StakeBalancer Analyzer"
+    ]
+  }
+}

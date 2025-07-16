@@ -1,0 +1,25 @@
+{
+  "name": "PatentForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "patentforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PatentForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { ip_protection_scroll_ready: true, agent: \"PatentForge\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PatentForge Processor"
+    ]
+  }
+}
