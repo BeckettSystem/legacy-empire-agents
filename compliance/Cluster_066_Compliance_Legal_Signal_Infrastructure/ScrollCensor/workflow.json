@@ -1,0 +1,25 @@
+{
+  "name": "ScrollCensor Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollcensor-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollCensor Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { compliance_active: true, agent: \"ScrollCensor\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollCensor Processor"
+    ]
+  }
+}

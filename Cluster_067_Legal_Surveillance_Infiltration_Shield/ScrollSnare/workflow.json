@@ -1,0 +1,25 @@
+{
+  "name": "ScrollSnare Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollsnare-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollSnare Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { agent_triggered: \"ScrollSnare\", alert_dispatched: true, routed_to: [\"Juris\", \"Valor\"], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollSnare Processor"
+    ]
+  }
+}

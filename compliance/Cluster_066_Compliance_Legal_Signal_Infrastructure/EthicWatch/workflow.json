@@ -1,0 +1,25 @@
+{
+  "name": "EthicWatch Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "ethicwatch-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "EthicWatch Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { compliance_active: true, agent: \"EthicWatch\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "EthicWatch Processor"
+    ]
+  }
+}

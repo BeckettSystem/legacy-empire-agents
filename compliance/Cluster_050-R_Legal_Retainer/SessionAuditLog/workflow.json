@@ -1,0 +1,25 @@
+{
+  "name": "SessionAuditLog Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "sessionauditlog-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SessionAuditLog Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { access_check_passed: true, agent: \"SessionAuditLog\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SessionAuditLog Processor"
+    ]
+  }
+}

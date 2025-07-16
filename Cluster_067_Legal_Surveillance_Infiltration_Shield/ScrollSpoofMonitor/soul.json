@@ -1,0 +1,17 @@
+{
+  "agent": "ScrollSpoofMonitor",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Legal Surveillance & Infiltration Shield",
+  "persona_fusion": [
+    "Impersonation Scroll Detectors",
+    "Credential Mismatch Auditors",
+    "Subnetwork Spoof Trackers",
+    "API Identity Guards",
+    "Log Consistency Agents"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

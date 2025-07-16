@@ -1,0 +1,25 @@
+{
+  "name": "ConsentBlock Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "consentblock-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ConsentBlock Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "return {\n  blocked: true,\n  message: \"This agent cannot execute changes. Consent required from Evan Beckett.\"\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ConsentBlock Analysis"
+    ]
+  }
+}

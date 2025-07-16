@@ -1,0 +1,25 @@
+{
+  "name": "SimShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "simshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SimShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { simulation_triggered: true, agent: \"SimShield\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SimShield Processor"
+    ]
+  }
+}

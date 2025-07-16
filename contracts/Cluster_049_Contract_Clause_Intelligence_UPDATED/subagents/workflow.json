@@ -1,0 +1,44 @@
+{
+  "name": "MissingProtectionFlagger Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "missing-protection-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Extract Contract Text",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const contractText = $json.contract || ''; return { contractText };"
+      }
+    },
+    {
+      "name": "Scan for Protection Clauses",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "// List of critical protection clauses\nconst requiredClauses = [\n  'indemnification',\n  'limitation of liability',\n  'hold harmless',\n  'arbitration',\n  'force majeure'\n];\n\nconst text = $json.contractText.toLowerCase();\nconst missing = requiredClauses.filter(clause => !text.includes(clause));\n\nreturn {\n  missingClauses: missing,\n  riskScore: missing.length * 20,\n  status: missing.length === 0 ? 'Safe' : 'At Risk'\n};"
+      }
+    },
+    {
+      "name": "Report Risk",
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "keepOnlySet": true,
+        "values": [
+          { "name": "missingClauses", "value": "={{$json.missingClauses}}" },
+          { "name": "riskScore", "value": "={{$json.riskScore}}" },
+          { "name": "status", "value": "={{$json.status}}" }
+        ]
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": ["Extract Contract Text"],
+    "Extract Contract Text": ["Scan for Protection Clauses"],
+    "Scan for Protection Clauses": ["Report Risk"]
+  }
+}

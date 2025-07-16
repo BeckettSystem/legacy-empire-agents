@@ -1,0 +1,25 @@
+{
+  "name": "ScrollInfiltrationScanner Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollinfiltrationscanner-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollInfiltrationScanner Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { agent_triggered: \"ScrollInfiltrationScanner\", alert_dispatched: true, routed_to: [\"Juris\", \"Valor\"], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollInfiltrationScanner Processor"
+    ]
+  }
+}

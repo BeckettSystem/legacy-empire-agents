@@ -1,0 +1,17 @@
+{
+  "agent": "LitigationScenarioSim",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Legal Simulation & System Lockdown",
+  "persona_fusion": [
+    "Risk Scenario Generators",
+    "Litigation Pattern Forecasters",
+    "Scroll Defense Planners",
+    "Threat Simulation Agents",
+    "Risk Forecast Counsel"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}
