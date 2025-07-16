@@ -1,0 +1,17 @@
+{
+  "agent": "IncapacityTrigger",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Power of Attorney & Estate Protection",
+  "persona_fusion": [
+    "Medical Event Detectors",
+    "POA Activation Engines",
+    "Court Declaration Watchers",
+    "Scroll Escalation Agents",
+    "Guardian Auto-Alert Coordinators"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

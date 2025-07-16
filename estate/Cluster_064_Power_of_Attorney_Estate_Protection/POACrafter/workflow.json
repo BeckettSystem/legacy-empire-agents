@@ -1,0 +1,25 @@
+{
+  "name": "POACrafter Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "poacrafter-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "POACrafter Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_protection_active: true, agent: \"POACrafter\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "POACrafter Processor"
+    ]
+  }
+}

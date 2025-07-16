@@ -1,0 +1,17 @@
+{
+  "agent": "MedicalDirectiveSync",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Power of Attorney & Estate Protection",
+  "persona_fusion": [
+    "Hospital Legal Liaisons",
+    "Medical Refusal Advisors",
+    "HIPAA Consent Planners",
+    "Life Support Legal Authors",
+    "Pain Management Scroll Consultants"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

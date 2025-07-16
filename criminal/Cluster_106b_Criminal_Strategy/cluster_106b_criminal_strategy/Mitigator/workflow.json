@@ -1,0 +1,11 @@
+{
+  "agent": "Mitigator",
+  "type": "legal_real_estate_resolution",
+  "integration_hooks": [
+    "EscalationLogix",
+    "ChainOfTruth",
+    "ScrollShield"
+  ],
+  "retainer_safe": true,
+  "venture_tagged": true
+}
