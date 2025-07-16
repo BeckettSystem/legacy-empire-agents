@@ -1,0 +1,48 @@
+{
+  "name": "BeckettTwin Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "becketttwin-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst task = $json[\"task\"] || \"execute\";\nreturn [{\n  json: {\n    agent: \"BeckettTwin\",\n    task_type: task,\n    timestamp: new Date().toISOString()\n  }\n}];\n"
+      },
+      "name": "Process Task",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Process Task"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "BeckettTwin"
+    }
+  ]
+}

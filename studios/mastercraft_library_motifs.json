@@ -1,0 +1,140 @@
+{
+  "motifs": [
+    {
+      "name": "Bond in Atlanta",
+      "description": "Cinematic luxury, mystery, masculine confidence, grand shots of Atlanta, dramatic music.",
+      "visuals": ["skyline dusk", "glass buildings", "silhouette", "classic car", "luxury interior", "reflection shots"],
+      "audio": ["suspenseful soundtrack", "subtle sound design", "authoritative voiceover"],
+      "story_arc": [
+        "Agent prepping for a mission",
+        "Driving through Atlanta at night",
+        "Touring exclusive listings",
+        "Meeting high-profile clients",
+        "Deal closed with a handshake"
+      ],
+      "cta": "Unlock Atlanta’s most exclusive homes. Welcome to Beckett Real Estate.",
+      "platforms": ["YouTube", "Instagram", "Facebook"]
+    },
+    {
+      "name": "Agent in Motion",
+      "description": "Time-lapse from car, city-to-city, phone calls, hustle, day-in-life, relatable and real.",
+      "visuals": ["dashboard POV", "highway", "city signs", "phone calls", "client meetings", "sunrise to sunset"],
+      "audio": ["upbeat modern soundtrack", "city sounds", "laughter", "phone ringtones"],
+      "story_arc": [
+        "Early coffee and breakfast",
+        "Driving to first showing",
+        "Quick calls with clients",
+        "Tours and appointments",
+        "Sunset wrap-up"
+      ],
+      "cta": "Atlanta doesn’t stop—neither do we. Your next home is already in motion.",
+      "platforms": ["TikTok", "Instagram Reels", "YouTube Shorts"]
+    },
+    {
+      "name": "Relocator",
+      "description": "From airport to city tour, meeting agent, exploring neighborhoods, finding 'home.'",
+      "visuals": ["airport arrival", "city skyline", "neighborhood drives", "community hotspots", "local shops"],
+      "audio": ["adventurous soundtrack", "agent narration"],
+      "story_arc": [
+        "Arrival at airport",
+        "First meeting with agent",
+        "Tour of communities",
+        "Exploring local spots",
+        "Keys in hand"
+      ],
+      "cta": "Relocating? Let Beckett be your concierge.",
+      "platforms": ["YouTube", "Instagram", "Facebook"]
+    },
+    {
+      "name": "Lake Life",
+      "description": "Seasonal montage—coffee, breakfast, boating, tubing, fishing, swimming, family fun.",
+      "visuals": ["lake at sunrise", "family at dock", "boats", "kids tubing", "seasonal changes", "bonfire", "holiday lights"],
+      "audio": ["ambient water sounds", "upbeat seasonal music", "family laughter"],
+      "story_arc": [
+        "Morning coffee on the porch",
+        "Kids get ready",
+        "Out on the boat",
+        "Day of adventure",
+        "Evening relaxation"
+      ],
+      "cta": "Experience Lake Life—year round.",
+      "platforms": ["YouTube", "TikTok", "Instagram"]
+    },
+    {
+      "name": "Veteran Homecoming",
+      "description": "Military flashbacks, new mission as homeowner, family keys, community celebration.",
+      "visuals": ["military base", "family reunion", "flag", "moving truck", "new home"],
+      "audio": ["heroic soundtrack", "patriotic undertones", "family cheers"],
+      "story_arc": [
+        "Boots in sand",
+        "Service and sacrifice",
+        "Transition home",
+        "Finding a house",
+        "Key handoff and celebration"
+      ],
+      "cta": "From service to settlement—your next mission is home.",
+      "platforms": ["YouTube", "Facebook", "LinkedIn"]
+    },
+    {
+      "name": "Everyday Hero",
+      "description": "Teacher, nurse, fireman, business owner, serving the community, arriving home, stress-free move.",
+      "visuals": ["classroom", "fire station", "shopfront", "family at home", "key handoff"],
+      "audio": ["uplifting cinematic score", "community sounds"],
+      "story_arc": [
+        "Serving the community",
+        "Finishing the workday",
+        "Heading home",
+        "New house tour",
+        "Family celebration"
+      ],
+      "cta": "You serve the community. We serve you.",
+      "platforms": ["YouTube", "Facebook", "TV", "LinkedIn"]
+    },
+    {
+      "name": "Fix & Flip Investor",
+      "description": "Auction, gutting, renovation, modern finishes, reveal, profit.",
+      "visuals": ["auction site", "distressed property", "demo montage", "design upgrades", "before-after reveal"],
+      "audio": ["fast-paced music", "construction sounds", "satisfying finish"],
+      "story_arc": [
+        "Winning an auction",
+        "Demo day",
+        "Rebuild",
+        "Modern staging",
+        "Showcase & sale"
+      ],
+      "cta": "From eyesore to investment—we make it happen.",
+      "platforms": ["Instagram", "YouTube", "LinkedIn"]
+    },
+    {
+      "name": "Custom Home Journey",
+      "description": "From land to luxury, blueprint meetings, lender, permit, construction time-lapse, dream home.",
+      "visuals": ["empty lot", "blueprints", "architect meeting", "county office", "hyperlapse build", "flythrough", "sunset party"],
+      "audio": ["cinematic build-up", "sound of tools", "cheers at sunset"],
+      "story_arc": [
+        "Scouting land",
+        "Designing the home",
+        "Securing permits and funding",
+        "Construction time-lapse",
+        "Family celebrates new home"
+      ],
+      "cta": "If you can dream it, we can build it.",
+      "platforms": ["YouTube", "Instagram", "Website"]
+    },
+    {
+      "name": "Trade-Up Journey",
+      "description": "Couple/family trading up through multiple homes, hyperlapse, ending in luxury mansion.",
+      "visuals": ["moving boxes", "SOLD signs", "kids growing", "nicer houses", "mansion", "champagne"],
+      "audio": ["energetic montage", "milestone celebrations"],
+      "story_arc": [
+        "First home",
+        "Growing family",
+        "Upgrades and moves",
+        "Dream mansion",
+        "Champagne toast"
+      ],
+      "cta": "Your dream home is closer than you think.",
+      "platforms": ["Instagram", "TikTok", "YouTube"]
+    }
+    // ... add the rest of the motifs from our previous conversation here
+  ]
+}

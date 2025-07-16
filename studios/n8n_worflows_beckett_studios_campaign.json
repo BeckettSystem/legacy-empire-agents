@@ -1,0 +1,219 @@
+{
+  "name": "Beckett Studio Complete Campaign",
+  "nodes": [
+    {
+      "parameters": { "httpMethod": "POST", "path": "launch_studio_campaign" },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 200]
+    },
+    {
+      "parameters": { "filePath": "/data/mastercraft_library/motifs.json", "options": {} },
+      "name": "Read Motif Library",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [300, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "const motifList = JSON.parse(Buffer.from(items[0].binary.data.data, 'base64').toString());\nconst motif = $json['motif'] || motifList.motifs[0].name;\nconst selected = motifList.motifs.find(m => m.name === motif) || motifList.motifs[0];\nreturn [{ json: { motif: selected, client_brief: $json['client_brief'] || 'Cinematic campaign for Atlanta luxury real estate.' } }];"
+      },
+      "name": "Select Motif",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are Apollo, Creative Director. Build a campaign blueprint in JSON: {\"creative_plan\":..., \"handoff\":...}. Use motif and brief:\nMotif: {{$json[\"motif\"][\"name\"]}}\nDescription: {{$json[\"motif\"][\"description\"]}}\nBrief: {{$json[\"client_brief\"]}}"
+          }
+        ]
+      },
+      "name": "Apollo",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [700, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are Calliope, Scriptwriter. Write a scene-by-scene script (array) using the Apollo plan, motif visuals, and emotional arc. Personas: Amanda Gorman, Aaron Sorkin, etc."
+          }
+        ]
+      },
+      "name": "Calliope",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are Ritchie, Cinematic Director. Turn Calliope's script into a JSON shot list and storyboard frames (mood, angle, style)."
+          }
+        ]
+      },
+      "name": "Ritchie",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1100, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are SceneComposer, building on Ritchie's storyboard. Suggest advanced transitions, camera moves, and platform adaptation (YouTube, Reels, Shorts, TikTok)."
+          }
+        ]
+      },
+      "name": "SceneComposer",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1200, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are NarrativeDirector. Punch up the story, refine for voice, and ensure motif/brand fit. Output new narrative beats."
+          }
+        ]
+      },
+      "name": "NarrativeDirector",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1300, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are BeckettTwin, the AI double-check. Validate every output for persona, motif, and brand accuracy. Output a JSON review and log."
+          }
+        ]
+      },
+      "name": "BeckettTwin",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1400, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are VisualForge, Visual Director. For each scene and shot, write Midjourney/Sora prompts with motif visuals, luxury cues, lighting, color, composition."
+          }
+        ]
+      },
+      "name": "VisualForge",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1500, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are SoundCraftr, Audio/Music Director. Select/describe music, VO, sound FX for each scene. Output as JSON: {music, vo, sfx, timing}."
+          }
+        ]
+      },
+      "name": "SoundCraftr",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1600, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are EditFlow, Post-Production Editor. Combine all elements into a cross-platform edit plan, suggest timing, QC, and approval checkpoints."
+          }
+        ]
+      },
+      "name": "EditFlow",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1700, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are Blaze, Campaign Commander. Build a release and analytics plan for all finished assets. Suggest platform scheduling, log every action."
+          }
+        ]
+      },
+      "name": "Blaze",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1800, 200]
+    },
+
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are Ghost, the Story Archivist. Write an internal log, with feedback notes, persona and motif tags, and recommendations for future improvements."
+          }
+        ]
+      },
+      "name": "Ghost",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [1900, 200]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [ ["Read Motif Library", "main", 0 ] ] },
+    "Read Motif Library": { "main": [ ["Select Motif", "main", 0 ] ] },
+    "Select Motif": { "main": [ ["Apollo", "main", 0 ] ] },
+    "Apollo": { "main": [ ["Calliope", "main", 0 ] ] },
+    "Calliope": { "main": [ ["Ritchie", "main", 0 ] ] },
+    "Ritchie": { "main": [ ["SceneComposer", "main", 0 ] ] },
+    "SceneComposer": { "main": [ ["NarrativeDirector", "main", 0 ] ] },
+    "NarrativeDirector": { "main": [ ["BeckettTwin", "main", 0 ] ] },
+    "BeckettTwin": { "main": [ ["VisualForge", "main", 0 ] ] },
+    "VisualForge": { "main": [ ["SoundCraftr", "main", 0 ] ] },
+    "SoundCraftr": { "main": [ ["EditFlow", "main", 0 ] ] },
+    "EditFlow": { "main": [ ["Blaze", "main", 0 ] ] },
+    "Blaze": { "main": [ ["Ghost", "main", 0 ] ] }
+  }
+}

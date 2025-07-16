@@ -1,0 +1,93 @@
+{
+  "name": "Cinematic Campaign Orchestration",
+  "nodes": [
+    {
+      "name": "Campaign Trigger",
+      "type": "webhook",
+      "params": {
+        "path": "launch_cinematic_campaign",
+        "methods": ["POST"]
+      }
+    },
+    {
+      "name": "Select Motif",
+      "type": "function",
+      "params": {
+        "code": "const motif = items[0].json.motif || 'Bond in Atlanta'; return [{ json: { motif } }];"
+      }
+    },
+    {
+      "name": "Apollo (Creative Brief)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/apollo/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "Calliope (Script)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/calliope/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "Ritchie (Storyboard)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/ritchie/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "VisualForge (Visuals)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/visualforge/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "SoundCraftr (Audio)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/soundcraftr/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "EditFlow (Edit)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/editflow/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    },
+    {
+      "name": "Blaze (Distribute)",
+      "type": "httpRequest",
+      "params": {
+        "url": "http://localhost:5001/blaze/scroll.py",
+        "method": "POST",
+        "body": "={{$json}}"
+      }
+    }
+  ],
+  "connections": {
+    "Campaign Trigger": ["Select Motif"],
+    "Select Motif": ["Apollo (Creative Brief)"],
+    "Apollo (Creative Brief)": ["Calliope (Script)"],
+    "Calliope (Script)": ["Ritchie (Storyboard)"],
+    "Ritchie (Storyboard)": ["VisualForge (Visuals)"],
+    "VisualForge (Visuals)": ["SoundCraftr (Audio)"],
+    "SoundCraftr (Audio)": ["EditFlow (Edit)"],
+    "EditFlow (Edit)": ["Blaze (Distribute)"]
+  }
+}
