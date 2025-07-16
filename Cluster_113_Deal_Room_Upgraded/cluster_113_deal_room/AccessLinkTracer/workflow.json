@@ -1,0 +1,12 @@
+{
+  "agent": "AccessLinkTracer",
+  "type": "access_monitoring",
+  "integration_hooks": [
+    "GatekeeperEngine",
+    "ComplianceTriggerLog",
+    "LegalEcho",
+    "ScrollLedgerSync"
+  ],
+  "retainer_safe": true,
+  "venture_tagged": true
+}
