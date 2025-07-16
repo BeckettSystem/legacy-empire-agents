@@ -1,0 +1,32 @@
+{
+    "name": "ExitHandoff_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunExitLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogOutcome",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunExitLogic"
+        ],
+        "RunExitLogic": [
+            "LogOutcome"
+        ],
+        "LogOutcome": [
+            "Complete"
+        ]
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "name": "LicenseRiskScanner_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "VerifyPatriarchUnlock",
+            "type": "function"
+        },
+        {
+            "name": "RunLicensingLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogGuardedAccess",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "VerifyPatriarchUnlock"
+        ],
+        "VerifyPatriarchUnlock": [
+            "RunLicensingLogic"
+        ],
+        "RunLicensingLogic": [
+            "LogGuardedAccess"
+        ],
+        "LogGuardedAccess": [
+            "Complete"
+        ]
+    }
+}

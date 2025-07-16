@@ -1,0 +1,39 @@
+{
+    "name": "ValuationArchitect_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "VerifyPatriarchSeal",
+            "type": "function"
+        },
+        {
+            "name": "RunMNASequence",
+            "type": "function"
+        },
+        {
+            "name": "LogScrollOutcome",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "VerifyPatriarchSeal"
+        ],
+        "VerifyPatriarchSeal": [
+            "RunMNASequence"
+        ],
+        "RunMNASequence": [
+            "LogScrollOutcome"
+        ],
+        "LogScrollOutcome": [
+            "Complete"
+        ]
+    }
+}

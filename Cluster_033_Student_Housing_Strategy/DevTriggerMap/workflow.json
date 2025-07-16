@@ -1,0 +1,32 @@
+{
+    "name": "DevTriggerMap_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunAssessment",
+            "type": "function"
+        },
+        {
+            "name": "LogResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunAssessment"
+        ],
+        "RunAssessment": [
+            "LogResult"
+        ],
+        "LogResult": [
+            "Complete"
+        ]
+    }
+}

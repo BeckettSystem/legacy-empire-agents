@@ -1,0 +1,39 @@
+{
+    "name": "BuyoutFormatter_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "VerifyAuthorization",
+            "type": "function"
+        },
+        {
+            "name": "RunCloneLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogReplication",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "VerifyAuthorization"
+        ],
+        "VerifyAuthorization": [
+            "RunCloneLogic"
+        ],
+        "RunCloneLogic": [
+            "LogReplication"
+        ],
+        "LogReplication": [
+            "Complete"
+        ]
+    }
+}
