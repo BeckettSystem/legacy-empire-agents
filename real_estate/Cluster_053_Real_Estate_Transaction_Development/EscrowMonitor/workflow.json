@@ -1,0 +1,25 @@
+{
+  "name": "EscrowMonitor Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "escrowmonitor-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "EscrowMonitor Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst anomalies = [];\nif ($json.wire_destination && !$json.wire_destination.includes(\"escrow\")) anomalies.push(\"Non-escrow destination flagged.\");\nreturn { escrow_alerts: anomalies, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "EscrowMonitor Processor"
+    ]
+  }
+}

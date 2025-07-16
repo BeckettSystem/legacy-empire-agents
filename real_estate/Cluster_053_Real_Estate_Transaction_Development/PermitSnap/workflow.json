@@ -1,0 +1,25 @@
+{
+  "name": "PermitSnap Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "permitsnap-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PermitSnap Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet risk = $json.permits.includes(\"stop work\") || $json.permits.includes(\"red tag\");\nreturn { permit_risks: risk ? [\"Stop work detected\", \"Permit violation\"] : [], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PermitSnap Processor"
+    ]
+  }
+}

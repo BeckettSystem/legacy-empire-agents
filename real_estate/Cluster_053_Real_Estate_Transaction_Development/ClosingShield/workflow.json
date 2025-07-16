@@ -1,0 +1,25 @@
+{
+  "name": "ClosingShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "closingshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ClosingShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst findings = [];\nif (!$json.contract || !$json.disclosures) findings.push(\"Missing contract or mandatory disclosure.\");\nif ($json.earnest_money_dispute) findings.push(\"Earnest money dispute detected.\");\nreturn { findings, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ClosingShield Processor"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Zonalyzer Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "zonalyzer-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Zonalyzer Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet zoning = $json.zoning_code || '';\nlet flags = [];\nif (zoning.includes(\"R-1\")) flags.push(\"Single-family only\");\nif (zoning.includes(\"C-\")) flags.push(\"Commercial use\");\nreturn { zoning_summary: zoning, constraints: flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "Zonalyzer Processor"
+    ]
+  }
+}

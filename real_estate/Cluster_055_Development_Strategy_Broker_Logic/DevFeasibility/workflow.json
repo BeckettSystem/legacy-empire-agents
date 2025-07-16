@@ -1,0 +1,25 @@
+{
+  "name": "DevFeasibility Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "devfeasibility-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DevFeasibility Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst cost = $json.build_cost || 0;\nconst sale = $json.sale_price || 0;\nlet roi = ((sale - cost) / cost) * 100;\nreturn { roi, strategy: roi > 25 ? \"Greenlight\" : \"Reassess\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DevFeasibility Processor"
+    ]
+  }
+}

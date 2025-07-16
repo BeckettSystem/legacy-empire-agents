@@ -1,0 +1,25 @@
+{
+  "name": "OverlayScanner Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "overlayscanner-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "OverlayScanner Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet overlays = $json.overlays || [];\nlet risks = overlays.filter(o => [\"flood\", \"historic\", \"wetland\", \"sewer\"].some(r => o.includes(r)));\nreturn { overlay_flags: risks, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "OverlayScanner Processor"
+    ]
+  }
+}

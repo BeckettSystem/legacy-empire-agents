@@ -1,0 +1,25 @@
+{
+  "name": "BrokerClauseScan Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "brokerclausescan-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "BrokerClauseScan Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst doc = $json.broker_agreement || '';\nlet issues = [];\nif (!doc.includes(\"co-brokerage\")) issues.push(\"No co-broker clause\");\nif (doc.includes(\"dual agency\") && !doc.includes(\"disclosure\")) issues.push(\"Missing dual agency disclosure\");\nreturn { broker_risks: issues, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "BrokerClauseScan Processor"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "agent": "ShortSalePrep",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Special Real Estate Scenarios",
+  "persona_fusion": [
+    "Loss Mitigation Specialists",
+    "Short Sale Coordinators",
+    "REO Asset Managers",
+    "HUD Packet Builders",
+    "Distressed Sale Attorneys"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

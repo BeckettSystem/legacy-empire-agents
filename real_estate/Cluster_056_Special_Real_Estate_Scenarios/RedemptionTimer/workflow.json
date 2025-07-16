@@ -1,0 +1,25 @@
+{
+  "name": "RedemptionTimer Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "redemptiontimer-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RedemptionTimer Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet purchase_date = new Date($json.purchase_date);\nlet expiration = new Date(purchase_date);\nexpiration.setFullYear(expiration.getFullYear() + 1);\nreturn { redemption_expires_on: expiration.toISOString().split(\"T\")[0], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RedemptionTimer Processor"
+    ]
+  }
+}

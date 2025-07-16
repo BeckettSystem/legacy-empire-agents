@@ -1,0 +1,25 @@
+{
+  "name": "LandPlanPro Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "landplanpro-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LandPlanPro Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet density = $json.zoning.includes(\"R-6\") ? \"High Density\" : \"Low Density\";\nlet flags = $json.access === \"landlocked\" ? [\"Access risk\"] : [];\nreturn { density, flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LandPlanPro Processor"
+    ]
+  }
+}

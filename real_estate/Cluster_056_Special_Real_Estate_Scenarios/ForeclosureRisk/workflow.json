@@ -1,0 +1,25 @@
+{
+  "name": "ForeclosureRisk Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "foreclosurerisk-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ForeclosureRisk Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst stage = $json.stage || '';\nlet timeline = stage === \"Pre-foreclosure\" ? \"30\u201390 days\" : \"Auction imminent\";\nreturn { foreclosure_stage: stage, estimated_timeline: timeline, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ForeclosureRisk Processor"
+    ]
+  }
+}

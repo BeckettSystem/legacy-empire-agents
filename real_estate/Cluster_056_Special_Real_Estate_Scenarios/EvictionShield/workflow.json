@@ -1,0 +1,25 @@
+{
+  "name": "EvictionShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "evictionshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "EvictionShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst lease = $json.lease_status || '';\nconst grounds = $json.grounds || '';\nreturn {\n  notice_required: lease === \"month-to-month\" ? \"30 days\" : \"7\u201314 days\",\n  court_filing: grounds.includes(\"non-payment\") ? \"Standard\" : \"High scrutiny\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "EvictionShield Processor"
+    ]
+  }
+}

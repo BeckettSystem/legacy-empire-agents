@@ -1,0 +1,25 @@
+{
+  "name": "PermitForecaster Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "permitforecaster-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PermitForecaster Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet permits = $json.permits || [];\nlet delays = permits.includes(\"site plan\") ? \"3\u20136 months\" : \"1\u20132 months\";\nreturn { expected_delay: delays, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PermitForecaster Processor"
+    ]
+  }
+}

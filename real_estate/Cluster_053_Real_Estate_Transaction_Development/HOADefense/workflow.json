@@ -1,0 +1,25 @@
+{
+  "name": "HOADefense Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "hoadefense-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "HOADefense Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst docs = $json.hoa_docs || '';\nlet risk = docs.includes(\"in perpetuity\") || docs.includes(\"board may fine at discretion\");\nreturn { hostile_terms: risk ? [\"Perpetual clause\", \"Discretionary fines\"] : [], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "HOADefense Processor"
+    ]
+  }
+}

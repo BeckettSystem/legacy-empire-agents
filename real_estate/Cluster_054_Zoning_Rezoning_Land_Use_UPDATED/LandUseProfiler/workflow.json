@@ -1,0 +1,25 @@
+{
+  "name": "LandUseProfiler Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "landuseprofiler-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LandUseProfiler Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet code = $json.zoning_code || '';\nlet result = code.includes(\"AG\") ? \"Agricultural only\" : \"Mixed use potential\";\nreturn { use_profile: result, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LandUseProfiler Processor"
+    ]
+  }
+}

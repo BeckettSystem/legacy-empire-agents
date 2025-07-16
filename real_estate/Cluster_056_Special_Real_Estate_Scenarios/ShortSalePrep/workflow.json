@@ -1,0 +1,25 @@
+{
+  "name": "ShortSalePrep Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "shortsaleprep-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ShortSalePrep Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  required_docs: [\"Hardship Letter\", \"HUD-1\", \"Listing Agreement\", \"Contract\", \"Proof of Value\"],\n  estimated_review_time: \"30\u201360 days\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ShortSalePrep Processor"
+    ]
+  }
+}

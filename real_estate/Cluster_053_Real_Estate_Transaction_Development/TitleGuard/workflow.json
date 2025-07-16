@@ -1,0 +1,25 @@
+{
+  "name": "TitleGuard Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "titleguard-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "TitleGuard Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst issues = [];\nif (!$json.vesting || !$json.legal_description) issues.push(\"Missing legal description or vesting info.\");\nif ($json.liens && $json.liens.length > 0) issues.push(\"Outstanding liens present.\");\nreturn { title_issues: issues, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "TitleGuard Processor"
+    ]
+  }
+}

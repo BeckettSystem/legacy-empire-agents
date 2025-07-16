@@ -1,0 +1,17 @@
+{
+  "agent": "BrokerClauseScan",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Development Strategy & Broker Logic",
+  "persona_fusion": [
+    "Referral Agreement Reviewers",
+    "State Broker Compliance Teams",
+    "RELO Contract Experts",
+    "Dual Agency Lawyers",
+    "MLS Clause Analysts"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

@@ -1,0 +1,25 @@
+{
+  "name": "PreCloseFlow Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "precloseflow-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PreCloseFlow Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  schedule_tasks: [\"Confirm Title\", \"Schedule Signing\", \"Distribute CD\", \"Final Review\"],\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PreCloseFlow Processor"
+    ]
+  }
+}

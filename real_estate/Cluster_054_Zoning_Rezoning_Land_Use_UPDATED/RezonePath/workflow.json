@@ -1,0 +1,25 @@
+{
+  "name": "RezonePath Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "rezonepath-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Rezone Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst jurisdiction = $json.county || 'Generic County';\nconst use_target = $json.target_use || 'Mixed Use';\nlet narrative = `Requesting rezoning to support ${use_target} in alignment with local development goals.`;\nlet steps = [\"Pre-application meeting\", \"Submit formal petition\", \"Public notice period\", \"Zoning board hearing\"];\nlet estimated_timeline = use_target === \"High Density\" ? \"4\u20136 months\" : \"2\u20134 months\";\nreturn {\n  jurisdiction,\n  narrative_scroll: narrative,\n  filing_steps: steps,\n  approval_timeline: estimated_timeline,\n  legal_escalation: use_target === \"High Density\" ? \"Recommended\" : \"Optional\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "Rezone Processor"
+    ]
+  }
+}

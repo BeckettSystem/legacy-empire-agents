@@ -1,0 +1,25 @@
+{
+  "name": "BoardSim Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "boardsim-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "BoardSim Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet area = $json.district || '';\nlet pushback = area.includes(\"historic\") ? \"High resistance likely\" : \"Moderate\";\nreturn { board_risk_profile: pushback, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "BoardSim Processor"
+    ]
+  }
+}

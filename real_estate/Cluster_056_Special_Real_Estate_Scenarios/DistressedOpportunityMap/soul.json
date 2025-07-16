@@ -1,0 +1,17 @@
+{
+  "agent": "DistressedOpportunityMap",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Special Real Estate Scenarios",
+  "persona_fusion": [
+    "Foreclosure Auction Strategists",
+    "MLS REO Data Analysts",
+    "Investor Real Estate Agents",
+    "Hunter System Advisors",
+    "Griffin Opportunity Integration Team"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

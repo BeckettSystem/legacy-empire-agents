@@ -1,0 +1,25 @@
+{
+  "name": "VarianceWhisper Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "variancewhisper-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "VarianceWhisper Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst request = $json.variance_request || '';\nlet likelihood = request.includes(\"height\") ? \"Low\" : \"Moderate\";\nreturn { variance_type: request, approval_likelihood: likelihood, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "VarianceWhisper Processor"
+    ]
+  }
+}

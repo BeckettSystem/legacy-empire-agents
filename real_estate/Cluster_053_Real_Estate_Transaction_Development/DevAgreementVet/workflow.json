@@ -1,0 +1,25 @@
+{
+  "name": "DevAgreementVet Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "devagreementvet-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DevAgreementVet Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst agreement = $json.dev_agreement || '';\nconst flags = [];\nif (!agreement.includes(\"completion schedule\")) flags.push(\"Missing timeline clause.\");\nif (!agreement.includes(\"scope of work\")) flags.push(\"Scope not defined.\");\nreturn { dev_flags: flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DevAgreementVet Processor"
+    ]
+  }
+}

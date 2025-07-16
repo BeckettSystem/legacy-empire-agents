@@ -1,0 +1,25 @@
+{
+  "name": "BoardPathway Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "boardpathway-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "BoardPathway Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet district = $json.district || \"Unknown\";\nlet pushback = district.includes(\"historic\") ? \"High Risk\" : \"Moderate\";\nreturn {\n  hearing_schedule: [\"Prep\", \"Submit\", \"Advertise\", \"Hear\"],\n  opposition_level: pushback,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "BoardPathway Processor"
+    ]
+  }
+}
