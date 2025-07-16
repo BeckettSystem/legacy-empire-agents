@@ -1,0 +1,32 @@
+{
+    "name": "TwinTrainer_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunScenario",
+            "type": "function"
+        },
+        {
+            "name": "LogPerformance",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunScenario"
+        ],
+        "RunScenario": [
+            "LogPerformance"
+        ],
+        "LogPerformance": [
+            "Complete"
+        ]
+    }
+}

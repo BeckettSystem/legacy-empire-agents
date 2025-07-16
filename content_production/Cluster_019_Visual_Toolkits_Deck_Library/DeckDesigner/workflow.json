@@ -1,0 +1,32 @@
+{
+    "name": "DeckDesigner_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "CreateVisualAsset",
+            "type": "function"
+        },
+        {
+            "name": "LogVisualOutput",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "CreateVisualAsset"
+        ],
+        "CreateVisualAsset": [
+            "LogVisualOutput"
+        ],
+        "LogVisualOutput": [
+            "Complete"
+        ]
+    }
+}

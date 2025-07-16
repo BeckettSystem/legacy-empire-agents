@@ -1,0 +1,32 @@
+{
+    "name": "AgentMirror_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunTrainingModule",
+            "type": "function"
+        },
+        {
+            "name": "LogProgress",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunTrainingModule"
+        ],
+        "RunTrainingModule": [
+            "LogProgress"
+        ],
+        "LogProgress": [
+            "Complete"
+        ]
+    }
+}

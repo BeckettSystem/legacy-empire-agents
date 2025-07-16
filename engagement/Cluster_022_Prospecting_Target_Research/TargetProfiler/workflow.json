@@ -1,0 +1,32 @@
+{
+    "name": "TargetProfiler_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "AnalyzeProspect",
+            "type": "function"
+        },
+        {
+            "name": "LogResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "AnalyzeProspect"
+        ],
+        "AnalyzeProspect": [
+            "LogResult"
+        ],
+        "LogResult": [
+            "Complete"
+        ]
+    }
+}

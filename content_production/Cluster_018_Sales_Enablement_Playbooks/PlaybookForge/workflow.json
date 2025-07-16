@@ -1,0 +1,32 @@
+{
+    "name": "PlaybookForge_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunDialogueLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogImpact",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunDialogueLogic"
+        ],
+        "RunDialogueLogic": [
+            "LogImpact"
+        ],
+        "LogImpact": [
+            "Complete"
+        ]
+    }
+}
