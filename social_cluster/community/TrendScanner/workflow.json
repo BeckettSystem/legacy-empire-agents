@@ -1,0 +1,48 @@
+{
+  "name": "TrendScanner Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "trendscanner-scan",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst platform = $json[\"platform\"] || \"instagram\";\nconst trend_category = $json[\"category\"] || \"content_format\";\nconst detected = [\"before/after\", \"photo carousel\", \"fast-cut b-roll\", \"raw testimonial\"];\nconst signal_strength = Math.floor(Math.random() * 100);\n\nreturn [{\n  json: {\n    platform: platform,\n    trend_category: trend_category,\n    trend_sample: detected[Math.floor(Math.random() * detected.length)],\n    signal_strength: signal_strength,\n    insight: signal_strength > 70 ? \"Strong emerging trend\" : \"Watchlist only\"\n  }\n}];\n"
+      },
+      "name": "Scan Trends",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Scan Trends"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "TrendScanner"
+    }
+  ]
+}

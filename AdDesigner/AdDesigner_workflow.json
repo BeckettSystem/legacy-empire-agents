@@ -1,0 +1,48 @@
+{
+  "name": "AdDesigner Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "addesigner-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst layout = $json[\"layout\"] || \"IG ad\";\nconst focus = $json[\"focus\"] || \"open house event\";\nreturn [{\n  json: {\n    layout_type: layout,\n    focus_topic: focus,\n    message: `Prepare design asset layout for ${layout} promoting ${focus}.`,\n    task: \"design_asset\"\n  }\n}];\n"
+      },
+      "name": "Prepare Design",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Prepare Design"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "AdDesigner"
+    }
+  ]
+}

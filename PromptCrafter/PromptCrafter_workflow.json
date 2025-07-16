@@ -1,0 +1,68 @@
+{
+  "name": "PromptCrafter Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "promptcrafter-process",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst targetTool = $json[\"tool\"] || \"openai\";\nconst taskType = $json[\"task_type\"] || \"copy\";\nconst topic = $json[\"topic\"];\nconst context = $json[\"context\"] || \"real estate campaign\";\n\nconst prompt = {\n  openai: `Write professional marketing copy for: ${topic}. Context: ${context}. Output must reflect a persuasive, brand-aligned tone.`,\n  midjourney: `A high-quality, cinematic image of ${topic}, style: luxury, lighting: natural, format: --v 5 --ar 4:5`,\n  claude: `Please draft marketing language for: ${topic}. Be concise, brand-aware, and emotionally engaging.`\n};\n\nreturn [{\n  json: {\n    tool: targetTool,\n    generated_prompt: prompt[targetTool] || prompt[\"openai\"],\n    origin: topic,\n    task: taskType\n  }\n}];\n"
+      },
+      "name": "Craft Prompt",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nreturn [{\n  json: {\n    agent: \"PromptCrafter\",\n    task: \"prompt_generation\",\n    prompt: $json[\"generated_prompt\"],\n    target_tool: $json[\"tool\"],\n    success: true,\n    timestamp: new Date().toISOString()\n  }\n}];\n"
+      },
+      "name": "Format Log",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Craft Prompt"
+        ]
+      ]
+    },
+    "Craft Prompt": {
+      "main": [
+        [
+          "Format Log"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "PromptCrafter"
+    }
+  ]
+}

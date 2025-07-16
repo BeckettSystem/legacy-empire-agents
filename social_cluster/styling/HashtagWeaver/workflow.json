@@ -1,0 +1,48 @@
+{
+  "name": "HashtagWeaver Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "hashtag-weaver",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst platform = $json[\"platform\"] || \"instagram\";\nconst tags = platform === \"instagram\"\n  ? [\"#realestate\", \"#justlisted\", \"#luxuryhomes\"]\n  : platform === \"tiktok\"\n  ? [\"#foryou\", \"#homegoals\", \"#househunting\"]\n  : [\"#realestate\", \"#marketupdate\"];\nreturn [{\n  json: {\n    platform: platform,\n    hashtags: tags\n  }\n}];\n"
+      },
+      "name": "Generate Hashtags",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Generate Hashtags"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "HashtagWeaver"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "SchedulerBot Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "schedulerbot-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst platform = $json[\"platform\"] || \"email\";\nconst publish_time = $json[\"schedule_time\"] || new Date().toISOString();\nconst message = $json[\"content\"];\n\nreturn [{\n  json: {\n    platform: platform,\n    schedule: publish_time,\n    task: \"dispatch\",\n    content: message,\n    status: \"Scheduled\"\n  }\n}];\n"
+      },
+      "name": "Schedule Content",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Schedule Content"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "SchedulerBot"
+    }
+  ]
+}

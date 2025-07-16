@@ -1,0 +1,48 @@
+{
+  "name": "PlatformStylist Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "platformstylist-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst platform = $json[\"platform\"];\nlet formatted;\n\nswitch (platform.toLowerCase()) {\n  case \"instagram\":\n    formatted = \"Add emojis, line breaks, 30 hashtags max.\";\n    break;\n  case \"linkedin\":\n    formatted = \"Use professional voice, no hashtags in body.\";\n    break;\n  case \"tiktok\":\n    formatted = \"Include CTA, trending sound tag, 5+ hashtags.\";\n    break;\n  default:\n    formatted = \"Default styling applied.\";\n}\n\nreturn [{\n  json: {\n    platform: platform,\n    formatting_notes: formatted\n  }\n}];\n"
+      },
+      "name": "Style Content",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Style Content"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "PlatformStylist"
+    }
+  ]
+}

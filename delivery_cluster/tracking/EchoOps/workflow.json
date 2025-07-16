@@ -1,0 +1,48 @@
+{
+  "name": "EchoOps Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "echoops-engagement",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst likes = $json[\"likes\"] || 0;\nconst comments = $json[\"comments\"] || 0;\nconst shares = $json[\"shares\"] || 0;\n\nreturn [{\n  json: {\n    task: \"engagement_monitoring\",\n    likes: likes,\n    comments: comments,\n    shares: shares,\n    tone_flag: comments > 10 ? \"Review tone\" : \"Normal\",\n    engagement_pulse: likes + comments + shares\n  }\n}];\n"
+      },
+      "name": "Analyze Engagement",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Analyze Engagement"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "EchoOps"
+    }
+  ]
+}

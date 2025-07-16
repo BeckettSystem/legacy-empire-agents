@@ -1,0 +1,48 @@
+{
+  "name": "FlyerBuilder Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "flyerbuilder-task",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst address = $json[\"property_address\"];\nconst mode = $json[\"mode\"] || \"listing\";\nconst flyer_type = mode === \"presentation\" ? \"listing_packet\" : \"print_flyer\";\nreturn [{\n  json: {\n    flyer_mode: flyer_type,\n    property_address: address,\n    task: \"flyer_generation\",\n    message: `Generate ${flyer_type} for ${address}`\n  }\n}];\n"
+      },
+      "name": "Build Flyer",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Build Flyer"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "FlyerBuilder"
+    }
+  ]
+}

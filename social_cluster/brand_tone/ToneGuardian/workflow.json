@@ -1,0 +1,48 @@
+{
+  "name": "ToneGuardian Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "toneguardian-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst message = $json[\"post\"];\nconst keywords = [\"legacy\", \"trust\", \"home\", \"exclusive\"];\nconst tone_match = keywords.filter(k => message.toLowerCase().includes(k)).length;\nconst result = tone_match >= 2 ? \"On Brand\" : \"Needs Review\";\n\nreturn [{\n  json: {\n    post: message,\n    tone_result: result\n  }\n}];\n"
+      },
+      "name": "Evaluate Tone",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Evaluate Tone"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "ToneGuardian"
+    }
+  ]
+}

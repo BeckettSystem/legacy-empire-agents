@@ -1,0 +1,48 @@
+{
+  "name": "DMLiaison Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "dm-liaison",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst msg = $json[\"message\"];\nconst keywords = [\"price\", \"available\", \"tour\", \"schedule\"];\nconst is_lead = keywords.some(k => msg.toLowerCase().includes(k));\nreturn [{\n  json: {\n    message: msg,\n    is_qualified_lead: is_lead,\n    reply: is_lead ? \"Thanks for reaching out! Let\u2019s schedule your private tour.\" : \"Thanks! Let us know if we can help with anything.\"\n  }\n}];\n"
+      },
+      "name": "Parse DM",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Parse DM"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "DMLiaison"
+    }
+  ]
+}

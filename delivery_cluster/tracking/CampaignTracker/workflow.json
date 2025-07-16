@@ -1,0 +1,48 @@
+{
+  "name": "CampaignTracker Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "campaigntracker-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst opens = $json[\"opens\"] || 0;\nconst clicks = $json[\"clicks\"] || 0;\nconst bounces = $json[\"bounces\"] || 0;\n\nreturn [{\n  json: {\n    task: \"track_campaign\",\n    opens: opens,\n    clicks: clicks,\n    bounces: bounces,\n    engagement_score: (opens * 0.6 + clicks * 0.3 - bounces * 0.1).toFixed(2)\n  }\n}];\n"
+      },
+      "name": "Track Performance",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Track Performance"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "CampaignTracker"
+    }
+  ]
+}

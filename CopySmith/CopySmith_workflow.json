@@ -1,0 +1,103 @@
+{
+  "name": "CopySmith Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "copysmith-command",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst input = $json[\"text\"];\nconst tone = $json[\"tone\"] || \"professional\";\nconst platform = $json[\"platform\"] || \"generic\";\n\nreturn [{\n  json: {\n    task: \"generate_copy\",\n    tone: tone,\n    platform: platform,\n    message: `Generating ${tone} copy for ${platform} based on: ${input}`,\n    input: input\n  }\n}];\n"
+      },
+      "name": "Refine Command",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "chat",
+        "openaiApi": {
+          "resource": "completion",
+          "model": "gpt-4",
+          "temperature": 0.7,
+          "maxTokens": 250
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a professional real estate copywriter for Beckett Real Estate. Maintain clarity, emotional engagement, and a call to action."
+          },
+          {
+            "role": "user",
+            "content": "={{$json[\"input\"]}}"
+          }
+        ]
+      },
+      "name": "Generate Copy",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst result = $json;\nreturn [{\n  json: {\n    agent: \"CopySmith\",\n    task: \"copy_generation\",\n    result: result.choices?.[0]?.message?.content || \"No result\",\n    success: true,\n    timestamp: new Date().toISOString()\n  }\n}];\n"
+      },
+      "name": "Format Log",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Refine Command"
+        ]
+      ]
+    },
+    "Refine Command": {
+      "main": [
+        [
+          "Generate Copy"
+        ]
+      ]
+    },
+    "Generate Copy": {
+      "main": [
+        [
+          "Format Log"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "CopySmith"
+    }
+  ]
+}

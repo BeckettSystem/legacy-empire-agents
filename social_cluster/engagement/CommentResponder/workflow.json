@@ -1,0 +1,48 @@
+{
+  "name": "CommentResponder Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "commentresponder-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst comment = $json[\"comment\"];\nconst tone = comment.includes(\"?\") ? \"Helpful\" : \"Friendly\";\nconst reply = tone === \"Helpful\" ? \"Thanks for your question! We'll follow up ASAP.\" : \"Appreciate your support! \ud83d\ude4c\";\n\nreturn [{\n  json: {\n    incoming_comment: comment,\n    detected_tone: tone,\n    auto_reply: reply\n  }\n}];\n"
+      },
+      "name": "Generate Reply",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Generate Reply"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "CommentResponder"
+    }
+  ]
+}

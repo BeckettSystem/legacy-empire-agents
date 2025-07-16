@@ -1,0 +1,48 @@
+{
+  "name": "CreativeCurator Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "creativecurator-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst style = $json[\"style\"] || \"luxury real estate\";\nconst subject = $json[\"subject\"] || \"modern home exterior\";\nreturn [{\n  json: {\n    prompt: `A ${style} image of ${subject}, cinematic lighting, --ar 4:5 --v 5`,\n    platform: \"Midjourney\",\n    task: \"visual_generation\"\n  }\n}];\n"
+      },
+      "name": "Generate Prompt",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Generate Prompt"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "CreativeCurator"
+    }
+  ]
+}

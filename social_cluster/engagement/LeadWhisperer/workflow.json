@@ -1,0 +1,48 @@
+{
+  "name": "LeadWhisperer Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "lead-whisperer",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst comment = $json[\"comment\"];\nconst soft_signals = [\"thinking of moving\", \"curious\", \"how much\", \"considering\"];\nconst lead_score = soft_signals.filter(k => comment.toLowerCase().includes(k)).length;\nconst intent = lead_score > 1 ? \"High\" : lead_score === 1 ? \"Moderate\" : \"Low\";\nreturn [{\n  json: {\n    comment: comment,\n    intent_score: lead_score,\n    intent_label: intent\n  }\n}];\n"
+      },
+      "name": "Score Intent",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Score Intent"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "LeadWhisperer"
+    }
+  ]
+}
