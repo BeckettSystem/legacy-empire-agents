@@ -1,0 +1,28 @@
+cluster: Cluster_096_CultureSync
+division: Talent, Hiring & Agent Expansion
+department: Talent, Hiring & Agent Expansion
+agents:
+  - ValueMonitor
+  - ToneGuardian
+  - RitualTracker
+  - CulturePulse
+  - SystemHarmonyMapper
+  - PatriarchRelay
+logs:
+  - value_alignment_log.json
+  - tone_shift_log.json
+  - ritual_participation_log.json
+  - culture_score_log.json
+  - harmony_drift_log.json
+  - blessing_queue.json
+config:
+  - core_values.json
+  - tone_standards.json
+  - ritual_registry.json
+  - culture_metrics_matrix.json
+  - venture_emotional_profiles.json
+watchers:
+  - HR Oversight
+  - Pulse Engine
+  - System Guardians
+blessing_required: true

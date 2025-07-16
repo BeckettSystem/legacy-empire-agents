@@ -1,0 +1,27 @@
+cluster: Cluster_093_RecruitRadar
+division: Talent, Hiring & Agent Expansion
+department: Talent, Hiring & Agent Expansion
+agents:
+  - SignalScanner
+  - RoleMatcher
+  - EthicsProfiler
+  - SkillRanker
+  - VentureAligner
+  - PatriarchRelay
+logs:
+  - candidate_profile_log.json
+  - role_match_log.json
+  - ethics_score_log.json
+  - skill_rank_log.json
+  - venture_alignment_log.json
+  - blessing_queue.json
+config:
+  - score_weight_matrix.json
+  - red_flag_matrix.json
+  - role_templates.json
+  - venture_needs_map.json
+watchers:
+  - HR Oversight
+  - Patriarch
+  - CultureSync
+blessing_required: true

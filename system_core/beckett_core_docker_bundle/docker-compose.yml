@@ -1,0 +1,31 @@
+
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n:/home/node/.n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=beckett123
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
+  mcp:
+    image: python:3.10
+    container_name: mcp
+    working_dir: /app
+    volumes:
+      - ./mcp:/app
+    command: python3 scroll_dispatcher.py

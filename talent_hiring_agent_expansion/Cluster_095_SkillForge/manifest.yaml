@@ -1,0 +1,28 @@
+cluster: Cluster_095_SkillForge
+division: Talent, Hiring & Agent Expansion
+department: Talent, Hiring & Agent Expansion
+agents:
+  - CapabilityLogger
+  - GapIdentifier
+  - SkillScorer
+  - GrowthForecaster
+  - VentureSkillMapper
+  - PatriarchRelay
+logs:
+  - skill_log.json
+  - capability_gaps.json
+  - score_matrix.json
+  - growth_recommendations.json
+  - venture_skill_alignment_log.json
+  - blessing_queue.json
+config:
+  - skill_tiers.json
+  - role_skill_matrix.json
+  - growth_scroll_templates.json
+  - venture_skill_needs.json
+  - development_tracking_rules.json
+watchers:
+  - OnboardPath
+  - Venture Directors
+  - CultureSync
+blessing_required: true

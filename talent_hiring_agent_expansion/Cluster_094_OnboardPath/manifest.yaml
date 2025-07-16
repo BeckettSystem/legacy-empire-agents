@@ -1,0 +1,28 @@
+cluster: Cluster_094_OnboardPath
+division: Talent, Hiring & Agent Expansion
+department: Talent, Hiring & Agent Expansion
+agents:
+  - WelcomeWeaver
+  - ToolDispatcher
+  - RoleInitializer
+  - CultureImprinter
+  - AccessRegistrar
+  - PatriarchRelay
+logs:
+  - onboarding_log.json
+  - tool_delivery_log.json
+  - role_activation_log.json
+  - cultural_alignment_log.json
+  - access_registry.json
+  - blessing_queue.json
+config:
+  - onboarding_templates.json
+  - access_level_matrix.json
+  - cultural_values_scroll.json
+  - toolkit_map.json
+  - venture_alignment_profiles.json
+watchers:
+  - RecruitRadar
+  - CultureSync
+  - HR Oversight
+blessing_required: true
