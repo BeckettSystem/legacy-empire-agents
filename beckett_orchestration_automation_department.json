@@ -1,0 +1,112 @@
+{
+  "name": "Beckett Orchestration Layer - Automation Department",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "none",
+        "path": "beckett-trigger"
+      },
+      "name": "Start Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "trigger_beckett"
+    },
+    {
+      "parameters": {
+        "functionCode": "return [\n  {\n    json: {\n      agent: \"n8n_Orchestrator\",\n      routeTo: \"Blaze\",\n      task: \"Launch Campaign Sequence\",\n      timestamp: new Date().toISOString(),\n      priority: \"high\"\n    }\n  }\n];"
+      },
+      "name": "n8n_Orchestrator",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const task = items[0].json;\nreturn [{\n  json: {\n    agent: \"Blaze\",\n    task: task.task,\n    status: \"Dispatched to Blaze\",\n    routedBy: task.agent,\n    logTime: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Blaze - Campaign Start",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const result = items[0].json;\nreturn [{\n  json: {\n    notice: `Task '${result.task}' successfully triggered by ${result.routedBy}`,\n    agent: \"Valor\",\n    destination: \"Throne Room\",\n    logTime: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Notify Valor",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "log",
+        "operation": "writeToLog",
+        "logData": "={{$json[\"notice\"]}} | {{$json[\"logTime\"]}}"
+      },
+      "name": "Throne Room Log",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Start Trigger": {
+      "main": [
+        [
+          "n8n_Orchestrator"
+        ]
+      ]
+    },
+    "n8n_Orchestrator": {
+      "main": [
+        [
+          "Blaze - Campaign Start"
+        ]
+      ]
+    },
+    "Blaze - Campaign Start": {
+      "main": [
+        [
+          "Notify Valor"
+        ]
+      ]
+    },
+    "Notify Valor": {
+      "main": [
+        [
+          "Throne Room Log"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "Orchestration"
+    },
+    {
+      "name": "Automation"
+    }
+  ]
+}
