@@ -1,0 +1,14 @@
+{
+  "agent": "LeverageSmith",
+  "type": "legal_negotiation_tactical_escalation",
+  "integration_hooks": [
+    "ClauseChecker",
+    "ScrollShield",
+    "EscalationLogix",
+    "ChainOfTruth"
+  ],
+  "signal_dispatch": true,
+  "log_echo": true,
+  "retainer_safe": true,
+  "venture_tagged": true
+}
