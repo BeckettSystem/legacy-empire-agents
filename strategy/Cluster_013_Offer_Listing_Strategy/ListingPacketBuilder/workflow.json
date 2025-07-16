@@ -1,0 +1,32 @@
+{
+    "name": "ListingPacketBuilder_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "GenerateOutput",
+            "type": "function"
+        },
+        {
+            "name": "LogResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "GenerateOutput"
+        ],
+        "GenerateOutput": [
+            "LogResult"
+        ],
+        "LogResult": [
+            "Complete"
+        ]
+    }
+}

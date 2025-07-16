@@ -1,0 +1,32 @@
+{
+    "name": "TermSheetWeaver_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "SubagentTask",
+            "type": "function"
+        },
+        {
+            "name": "LogOutput",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "SubagentTask"
+        ],
+        "SubagentTask": [
+            "LogOutput"
+        ],
+        "LogOutput": [
+            "Complete"
+        ]
+    }
+}

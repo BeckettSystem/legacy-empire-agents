@@ -1,0 +1,32 @@
+{
+    "name": "MarketLens_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ProcessInsight",
+            "type": "function"
+        },
+        {
+            "name": "LogWeeklyTrace",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ProcessInsight"
+        ],
+        "ProcessInsight": [
+            "LogWeeklyTrace"
+        ],
+        "LogWeeklyTrace": [
+            "Complete"
+        ]
+    }
+}

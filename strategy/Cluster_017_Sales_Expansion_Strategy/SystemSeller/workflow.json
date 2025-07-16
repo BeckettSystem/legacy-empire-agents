@@ -1,0 +1,32 @@
+{
+    "name": "SystemSeller_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "EvaluateAsset",
+            "type": "function"
+        },
+        {
+            "name": "LogResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "EvaluateAsset"
+        ],
+        "EvaluateAsset": [
+            "LogResult"
+        ],
+        "LogResult": [
+            "Complete"
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "RebuttalCraft_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "HandleNegotiation",
+            "type": "function"
+        },
+        {
+            "name": "LogInteraction",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "HandleNegotiation"
+        ],
+        "HandleNegotiation": [
+            "LogInteraction"
+        ],
+        "LogInteraction": [
+            "Complete"
+        ]
+    }
+}
