@@ -1,0 +1,25 @@
+{
+  "name": "Interpretus Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "interpretus-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Interpretus Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const scroll = $json.scroll || '';\nlet jurisdictions = ['Georgia', 'Federal', 'Strict'];\nlet interpretations = jurisdictions.map(j => ({\n  jurisdiction: j,\n  issues: scroll.includes(\"guarantee\") ? [\"Possible overpromise\"] : []\n}));\nreturn { interpretations, decision: \"Manual review required.\" };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "Interpretus Analysis"
+    ]
+  }
+}

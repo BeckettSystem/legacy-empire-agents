@@ -1,0 +1,25 @@
+{
+  "name": "AccredCheck Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "accredcheck-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "AccredCheck Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst income = $json.income || 0;\nconst accredited = income >= 200000;\nreturn { accredited_status: accredited, documents_required: accredited ? [\"Income Proof\", \"CPA Letter\"] : [\"Investor Disclaimer\"], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "AccredCheck Processor"
+    ]
+  }
+}

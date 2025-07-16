@@ -1,0 +1,25 @@
+{
+  "name": "RiskSplitForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "risksplitforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RiskSplitForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  structure: {\n    general_partner: \"Beckett Holdings\",\n    limited_partners: \"Passive Investors\",\n    equity_split: \"80/20\",\n    preferred_return: \"8%\",\n    waterfall: [\"Return of Capital\", \"Preferred Return\", \"Catch-Up\", \"Profit Split\"]\n  },\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RiskSplitForge Processor"
+    ]
+  }
+}

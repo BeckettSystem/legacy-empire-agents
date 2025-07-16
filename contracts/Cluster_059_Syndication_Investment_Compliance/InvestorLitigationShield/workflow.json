@@ -1,0 +1,25 @@
+{
+  "name": "InvestorLitigationShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "investorlitigationshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "InvestorLitigationShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet loss = $json.loss_amount || 0;\nlet threat = loss > 10000 ? \"High Risk of Action\" : \"Monitor\";\nreturn { litigation_risk: threat, recommended_action: \"Engage legal defense scroll team\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "InvestorLitigationShield Processor"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "agent": "AccredCheck",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Syndication & Investment Compliance",
+  "persona_fusion": [
+    "Investor Compliance Officers",
+    "KYC Verification Teams",
+    "Reg D Validation Experts",
+    "Capital Raise Risk Advisors",
+    "Legal Intake Verification Consultants"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

@@ -1,0 +1,25 @@
+{
+  "name": "RiskWeaver Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "riskweaver-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RiskWeaver Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const sections = $json.sections || {};\nlet output = {};\nfor (let [key, val] of Object.entries(sections)) {\n  const risk = val.includes(\"guarantee\") ? 70 : 10;\n  output[key] = { text: val, risk_weight: risk };\n}\nreturn { section_risks: output };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RiskWeaver Analysis"
+    ]
+  }
+}

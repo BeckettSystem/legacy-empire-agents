@@ -1,0 +1,25 @@
+{
+  "name": "RegScan Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "regscan-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RegScan Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst amount = $json.amount || 0;\nlet rule = amount > 5000000 ? \"Reg D 506(c)\" : \"Reg D 506(b)\";\nreturn { rule_applied: rule, compliance_required: true, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RegScan Processor"
+    ]
+  }
+}

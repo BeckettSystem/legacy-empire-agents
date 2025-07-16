@@ -1,0 +1,25 @@
+{
+  "name": "ShieldEcho Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "shieldecho-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ShieldEcho Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const message = {\n  scroll_id: $json.scroll_id || 'unknown',\n  risk_alert: $json.alert || 'unspecified',\n  sent_to: ['Valor', 'Juris', 'MarketingLead']\n};\nreturn message;"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ShieldEcho Analysis"
+    ]
+  }
+}

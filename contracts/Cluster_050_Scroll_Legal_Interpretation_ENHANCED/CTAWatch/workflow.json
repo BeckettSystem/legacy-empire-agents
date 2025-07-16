@@ -1,0 +1,25 @@
+{
+  "name": "CTAWatch Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "ctawatch-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "CTAWatch Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const cta = $json.cta || '';\nconst flags = ['i accept', 'opt-in', 'submit'].filter(term => cta.toLowerCase().includes(term));\nreturn {\n  flagged_cta_phrases: flags,\n  alertLevel: flags.length > 1 ? 'High' : 'Moderate',\n  consent_required: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "CTAWatch Analysis"
+    ]
+  }
+}

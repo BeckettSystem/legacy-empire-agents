@@ -1,0 +1,25 @@
+{
+  "name": "ScrollShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollShield Analysis",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "const scroll = $json.scroll || '';\nconst triggers = ['i agree', 'by continuing', 'you accept', 'submit'];\nconst flags = triggers.filter(p => scroll.toLowerCase().includes(p));\nconst risk_weight = flags.length * 25;\nreturn {\n  risk_weight,\n  decision: \"Manual review required. No automatic changes made.\",\n  flags\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollShield Analysis"
+    ]
+  }
+}
