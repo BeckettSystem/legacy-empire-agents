@@ -1,0 +1,27 @@
+cluster: Cluster_090_EscalationFlow
+division: Client Services & Escalation Handling
+department: Client Services & Escalation Handling
+agents:
+  - IssueClassifier
+  - TriageRouter
+  - QueueManager
+  - PlatformTagger
+  - VentureEscalationLinker
+  - PatriarchRelay
+logs:
+  - escalation_log.json
+  - triage_queue.json
+  - platform_escalation_map.json
+  - venture_escalation_log.json
+  - blessing_queue.json
+  - resolution_outcome_log.json
+config:
+  - escalation_thresholds.json
+  - agent_escalation_matrix.json
+  - triage_routing_rules.json
+  - escalation_score_matrix.json
+watchers:
+  - CareWhisperer
+  - Client Ops Oversight
+  - Escalation Control Relay
+blessing_required: true

@@ -1,0 +1,27 @@
+cluster: Cluster_091_SurveyPulse
+division: Client Services & Escalation Handling
+department: Client Services & Escalation Handling
+agents:
+  - SurveyTrigger
+  - ResponseParser
+  - SatisfactionScorer
+  - PlatformLinker
+  - VentureTagger
+  - PatriarchRelay
+logs:
+  - survey_responses.json
+  - nps_log.json
+  - friction_score_log.json
+  - venture_feedback_log.json
+  - platform_feedback_map.json
+  - blessing_queue.json
+config:
+  - survey_templates.json
+  - feedback_thresholds.json
+  - friction_keywords.json
+  - nps_scale_map.json
+watchers:
+  - CareWhisperer
+  - EscalationFlow
+  - CRM Integrator
+blessing_required: true

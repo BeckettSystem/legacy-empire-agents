@@ -1,0 +1,27 @@
+cluster: Cluster_097a_DataFlowSentinel
+division: Data Sovereignty & Compliance
+department: Data Sovereignty & Compliance
+agents:
+  - FlowLogger
+  - AccessTracer
+  - FlowClassifier
+  - AnomalyDetector
+  - PatternMapper
+  - PatriarchRelay
+logs:
+  - data_flow_log.json
+  - access_event_log.json
+  - flow_classification_log.json
+  - anomaly_alert_log.json
+  - flow_profile_map.json
+  - blessing_queue.json
+config:
+  - venture_data_map.json
+  - risk_signal_matrix.json
+  - platform_flow_matrix.json
+  - data_classification_tags.json
+watchers:
+  - AuditBeacon
+  - DataAuthority
+  - System Core
+blessing_required: true

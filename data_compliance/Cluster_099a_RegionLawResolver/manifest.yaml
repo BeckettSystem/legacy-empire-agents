@@ -1,0 +1,24 @@
+cluster: Cluster_099a_RegionLawResolver
+division: Data Sovereignty & Compliance
+department: Data Sovereignty & Compliance
+agents:
+  - RegionResolver
+  - RegionRuleClassifier
+  - ConsentVerifier
+  - RegionPriorityMatrixUpdater
+  - PatriarchRelay
+logs:
+  - geo_compliance_log.json
+  - jurisdiction_map_log.json
+  - region_priority_log.json
+  - consent_scope_verification_log.json
+  - blessing_queue.json
+config:
+  - region_rule_map.json
+  - region_priority_matrix.json
+  - geo_location_exemptions.json
+watchers:
+  - ConsentLedger
+  - DataAuthority
+  - ComplianceEnforcer
+blessing_required: true

@@ -1,0 +1,27 @@
+cluster: Cluster_097b_DataAuthority
+division: Data Sovereignty & Compliance
+department: Data Sovereignty & Compliance
+agents:
+  - PolicyEnforcer
+  - PermissionChecker
+  - ExportGatekeeper
+  - PurgeRequestHandler
+  - DataActionAuditor
+  - PatriarchRelay
+logs:
+  - policy_violation_log.json
+  - permission_check_log.json
+  - export_request_log.json
+  - deletion_request_log.json
+  - action_audit_log.json
+  - blessing_queue.json
+config:
+  - data_policies.json
+  - permission_matrix.json
+  - export_templates.json
+  - deletion_protocols.json
+watchers:
+  - ConsentLedger
+  - GDPRShield
+  - AuditBeacon
+blessing_required: true

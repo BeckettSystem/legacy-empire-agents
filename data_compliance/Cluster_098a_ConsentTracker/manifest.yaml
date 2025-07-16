@@ -1,0 +1,25 @@
+cluster: Cluster_098a_ConsentTracker
+division: Data Sovereignty & Compliance
+department: Data Sovereignty & Compliance
+agents:
+  - ConsentLogger
+  - ConsentUpdater
+  - ConsentRevoker
+  - PlatformConsentTagger
+  - PatriarchRelay
+logs:
+  - consent_log.json
+  - consent_update_log.json
+  - opt_out_log.json
+  - geo_consent_registry.json
+  - voice_scroll_validation_log.json
+  - persona_consent_matrix.json
+config:
+  - venture_consent_matrix.json
+  - platform_consent_templates.json
+  - reconsent_schedule_matrix.json
+watchers:
+  - GDPRShield
+  - CRM Engine
+  - ConsentValidator
+blessing_required: true

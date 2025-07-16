@@ -1,0 +1,24 @@
+cluster: Cluster_098b_ConsentValidator
+division: Data Sovereignty & Compliance
+department: Data Sovereignty & Compliance
+agents:
+  - ConsentValidator
+  - ConsentScanner
+  - ConsentAuditBuilder
+  - OverrideReviewer
+  - PatriarchRelay
+logs:
+  - consent_validation_log.json
+  - consent_violation_log.json
+  - assumed_consent_log.json
+  - consent_audit_summary.json
+  - blessing_queue.json
+config:
+  - consent_tiers.json
+  - consent_reference_map.json
+  - reconsent_rules.json
+watchers:
+  - ConsentTracker
+  - DataAuthority
+  - AuditBeacon
+blessing_required: true

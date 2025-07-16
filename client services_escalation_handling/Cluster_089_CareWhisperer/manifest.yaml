@@ -1,0 +1,35 @@
+cluster: Cluster_089_CareWhisperer
+division: Client Services & Escalation Handling
+department: Client Services & Escalation Handling
+agents:
+  - ToneSensor
+  - FeedbackLogger
+  - PulseAnalyzer
+  - RelationshipMapper
+  - VentureTagger
+  - PatriarchRelay
+  - SilenceWatcher
+  - ClientPatternTracker
+logs:
+  - client_tone_log.json
+  - feedback_snapshots.json
+  - pulse_score_log.json
+  - mood_shift_alerts.json
+  - blessing_queue.json
+config:
+  - tone_thresholds.json
+  - sentiment_matrix.json
+  - venture_map.json
+  - emotional_risk_flags.json
+  - pattern_memory.json
+  - persona_match_matrix.json
+  - ventricle_score.json
+  - tone_repair_templates.json
+  - platform_weighting.json
+  - empathy_script_blocks.json
+watchers:
+  - CRM Cluster
+  - EscalationFlow
+  - Pulse System
+  - Client Ops Oversight
+blessing_required: true

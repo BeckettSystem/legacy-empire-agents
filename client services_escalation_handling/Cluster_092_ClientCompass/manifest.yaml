@@ -1,0 +1,28 @@
+cluster: Cluster_092_ClientCompass
+division: Client Services & Escalation Handling
+department: Client Services & Escalation Handling
+agents:
+  - JourneyMapper
+  - EngagementScorer
+  - NextActionForecaster
+  - PlatformTracker
+  - VentureAffiliationMapper
+  - PatriarchRelay
+logs:
+  - client_journey_log.json
+  - engagement_scores.json
+  - next_action_suggestions.json
+  - platform_use_map.json
+  - venture_engagement_log.json
+  - blessing_queue.json
+config:
+  - engagement_weights.json
+  - next_action_rules.json
+  - milestone_map.json
+  - venture_affiliation_matrix.json
+watchers:
+  - SurveyPulse
+  - CRM Cluster
+  - CareWhisperer
+  - Client Ops Oversight
+blessing_required: true

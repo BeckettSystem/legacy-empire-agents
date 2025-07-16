@@ -1,0 +1,1 @@
+{"read": ["agent", "manager"], "write": ["manager", "admin"], "delete": ["Patriarch"], "export": ["Patriarch", "DataAdmin"]}
