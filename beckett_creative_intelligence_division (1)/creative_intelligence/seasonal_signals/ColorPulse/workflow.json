@@ -1,0 +1,48 @@
+{
+  "name": "ColorPulse Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "colorpulse-trigger",
+        "responseMode": "onReceived"
+      },
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst task = $json[\"task\"] || \"trend_tracking\";\nreturn [{\n  json: {\n    agent: \"ColorPulse\",\n    task_type: task,\n    description: \"ColorPulse handles creative intelligence in cluster 'seasonal_signals'.\",\n    timestamp: new Date().toISOString()\n  }\n}];\n"
+      },
+      "name": "Process Task",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          "Process Task"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "tags": [
+    {
+      "name": "Beckett"
+    },
+    {
+      "name": "ColorPulse"
+    }
+  ]
+}

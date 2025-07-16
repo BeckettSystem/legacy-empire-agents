@@ -1,0 +1,32 @@
+{
+    "name": "ComplianceReader_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ProcessJVLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogStructure",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ProcessJVLogic"
+        ],
+        "ProcessJVLogic": [
+            "LogStructure"
+        ],
+        "LogStructure": [
+            "Complete"
+        ]
+    }
+}

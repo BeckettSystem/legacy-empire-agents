@@ -1,0 +1,32 @@
+{
+    "name": "MessageDispatcher_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "PrepareAndSend",
+            "type": "function"
+        },
+        {
+            "name": "LogEngagement",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "PrepareAndSend"
+        ],
+        "PrepareAndSend": [
+            "LogEngagement"
+        ],
+        "LogEngagement": [
+            "Complete"
+        ]
+    }
+}

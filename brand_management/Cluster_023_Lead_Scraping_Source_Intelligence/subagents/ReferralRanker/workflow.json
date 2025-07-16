@@ -1,0 +1,32 @@
+{
+    "name": "ReferralRanker_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ScrapeSource",
+            "type": "function"
+        },
+        {
+            "name": "LogDiscovery",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ScrapeSource"
+        ],
+        "ScrapeSource": [
+            "LogDiscovery"
+        ],
+        "LogDiscovery": [
+            "Complete"
+        ]
+    }
+}
