@@ -1,0 +1,29 @@
+cluster: Cluster_085_NarrativeAnchor
+division: Narrative Architecture & Positioning
+department: Media, Narrative & Reputation Control
+agents:
+  - VoiceArchitect
+  - OriginWeaver
+  - MessageFramer
+  - NarrativeTracker
+  - DriftWatcher
+  - PatriarchRelay
+logs:
+  - positioning_statements.json
+  - brand_voice_matrix.json
+  - origin_story_log.json
+  - public_talking_points.json
+  - drift_alerts.json
+  - narrative_history_log.json
+config:
+  - narrative_registry.json
+  - storycraft_rules.json
+  - tone_matrix.json
+  - brand_fragments.json
+  - drift_alert_matrix.json
+  - blessing_queue.json
+watchers:
+  - Patriarch
+  - MediaGate
+  - Valor
+blessing_required: true

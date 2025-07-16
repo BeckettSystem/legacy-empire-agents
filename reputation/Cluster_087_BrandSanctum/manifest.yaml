@@ -1,0 +1,30 @@
+cluster: Cluster_087_BrandSanctum
+division: Brand Sanctum & Digital Memory
+department: Media, Narrative & Reputation Control
+agents:
+  - CoreHistorian
+  - VisualAnchor
+  - ToneDefender
+  - ScrollVault
+  - LegacyMirror
+  - PatriarchRelay
+logs:
+  - brand_statements_log.json
+  - visual_identity_log.json
+  - scroll_archive.json
+  - tone_drift_log.json
+  - legacy_snapshots.json
+  - blessing_queue.json
+config:
+  - brand_identity.json
+  - sacred_scrolls.json
+  - voice_model.json
+  - visual_registry.json
+  - change_log.json
+  - scroll_home_map.json
+  - venture_brand_map.json
+watchers:
+  - NarrativeAnchor
+  - CrisisComms
+  - MediaGate
+blessing_required: true

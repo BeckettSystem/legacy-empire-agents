@@ -1,0 +1,28 @@
+cluster: Cluster_088_MediaGate
+division: Media Engagement & Public Trust
+department: Media, Narrative & Reputation Control
+agents:
+  - MediaKitBuilder
+  - QuoteComposer
+  - InterviewFramer
+  - PodcastPreparer
+  - MediaHistoryLogger
+  - PatriarchRelay
+logs:
+  - media_kit_log.json
+  - public_quote_log.json
+  - interview_script_log.json
+  - podcast_script_log.json
+  - blessing_queue.json
+  - external_request_log.json
+config:
+  - approved_bios.json
+  - quote_tone_matrix.json
+  - podcast_narrative_blocks.json
+  - media_release_registry.json
+watchers:
+  - BrandSanctum
+  - NarrativeAnchor
+  - CrisisComms
+  - Reputation Oversight Team
+blessing_required: true

@@ -1,0 +1,28 @@
+cluster: Cluster_086_CrisisComms
+division: Crisis Communication & Threat Response
+department: Media, Narrative & Reputation Control
+agents:
+  - ThreatScanner
+  - SignalClassifier
+  - CrisisFramer
+  - MisinformationTracker
+  - PatriarchRelay
+  - SentimentMonitor
+logs:
+  - threat_log.json
+  - signal_risk_matrix.json
+  - misinformation_log.json
+  - crisis_response_drafts.json
+  - sentiment_wave_log.json
+  - blessing_queue.json
+  - narrative_misinterpretation_log.json
+config:
+  - risk_classification_matrix.json
+  - defense_tone_matrix.json
+  - response_templates.json
+  - crisis_registry.json
+watchers:
+  - NarrativeAnchor
+  - MediaGate
+  - Reputation Oversight Team
+blessing_required: true
