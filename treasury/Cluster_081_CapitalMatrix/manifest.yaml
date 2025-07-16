@@ -1,0 +1,24 @@
+cluster: Cluster_081_CapitalMatrix
+division: Investor Intake & Profit Distribution
+department: Finance, Treasury & Capital Deployment
+agents:
+  - InvestorIntake
+  - SplitSimulator
+  - ReturnTracker
+  - WaterfallModeler
+  - PatriarchRelay
+  - DistributionLedger
+logs:
+  - investor_log.json
+  - split_scenarios.json
+  - return_tracking.json
+  - waterfall_models.json
+  - distribution_log.json
+  - unauthorized_distribution_attempts.json
+config:
+  - delegation_matrix.json
+watchers:
+  - Ledger
+  - Solon
+  - Patriarch
+blessing_required: true

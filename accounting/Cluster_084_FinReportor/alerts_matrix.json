@@ -1,0 +1,1 @@
+{"negative_net_margin": "Flag if below -10%", "burn_exceeds_revenue": "Alert if burn > revenue 2+ months", "bookkeeping_drift": "Flag if journal entry sync fails > 3 days"}

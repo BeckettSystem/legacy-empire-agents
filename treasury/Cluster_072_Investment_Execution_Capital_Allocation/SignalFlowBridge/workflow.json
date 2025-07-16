@@ -1,0 +1,25 @@
+{
+  "name": "SignalFlowBridge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "signalflowbridge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SignalFlowBridge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_ready: true, agent: \"SignalFlowBridge\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SignalFlowBridge Processor"
+    ]
+  }
+}

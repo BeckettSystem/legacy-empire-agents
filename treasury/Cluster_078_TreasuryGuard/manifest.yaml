@@ -1,0 +1,24 @@
+cluster: Cluster_078_TreasuryGuard
+division: Treasury Operations & Liquidity Management
+department: Finance, Treasury & Capital Deployment
+agents:
+  - TreasuryGuard
+  - BufferSentinel
+  - RunwayProjector
+  - StreamSplitter
+  - TreasuryExporter
+logs:
+  - cashflow_log.json
+  - reserve_alerts.json
+  - liquidity_snapshot.json
+  - runway_projection_log.json
+  - revenue_breakdown.json
+  - export_log.json
+memory:
+  - treasury_snapshot.json
+config:
+  - thresholds.json
+watchers:
+  - Ledger
+  - Solon
+  - Valor

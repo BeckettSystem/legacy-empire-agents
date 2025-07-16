@@ -1,0 +1,1 @@
+{"augusta_rule": {"description": "14-day rental exclusion for primary residence", "code": "IRC §280A(g)", "max_days": 14}, "bonus_depreciation": {"active_years": ["2023", "2024", "2025"], "rate": "100%", "phaseout": True}}

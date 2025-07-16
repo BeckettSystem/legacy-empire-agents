@@ -1,0 +1,25 @@
+{
+  "name": "DiversifyBot Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "diversifybot-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DiversifyBot Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_ready: true, agent: \"DiversifyBot\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DiversifyBot Processor"
+    ]
+  }
+}

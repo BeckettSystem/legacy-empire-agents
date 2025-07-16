@@ -1,0 +1,29 @@
+cluster: Cluster_083_TaxAnchor
+division: Tax Prep, Deductions & Filing Strategy
+department: Finance, Treasury & Capital Deployment
+agents:
+  - DeductoBot
+  - Depreciator
+  - LoopholeHunter
+  - QuarterForecaster
+  - TaxPacketGenerator
+  - PatriarchRelay
+logs:
+  - deduction_log.json
+  - depreciation_schedules.json
+  - loophole_flags.json
+  - quarterly_tax_projection.json
+  - cpa_packet_exports.json
+  - audit_risk_flags.json
+  - blessing_queue.json
+config:
+  - tax_code_repository.json
+  - depreciation_tables.json
+  - filing_deadlines.json
+  - loophole_matrix.json
+  - audit_flag_matrix.json
+watchers:
+  - LedgerCore
+  - FinReportor
+  - Patriarch
+blessing_required: true

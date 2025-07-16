@@ -1,0 +1,23 @@
+cluster: Cluster_080_AssetFlow
+division: Capital Allocation & Investment Matrix
+department: Finance, Treasury & Capital Deployment
+agents:
+  - CapitalScanner
+  - FlowRecommender
+  - NeedLogger
+  - AssetRouterSim
+  - DelegationGate
+  - PatriarchRelay
+logs:
+  - capital_requests.json
+  - allocation_suggestions.json
+  - impact_simulations.json
+  - product_needs_log.json
+  - patriarch_review_log.json
+config:
+  - delegation_matrix.json
+watchers:
+  - Ledger
+  - Solon
+  - Patriarch
+blessing_required: true

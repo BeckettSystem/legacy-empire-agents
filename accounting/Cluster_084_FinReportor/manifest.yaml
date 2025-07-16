@@ -1,0 +1,29 @@
+cluster: Cluster_084_FinReportor
+division: Financial Reporting & Performance Intelligence
+department: Finance, Treasury & Capital Deployment
+agents:
+  - PAndLBuilder
+  - BalanceSheetor
+  - PerformanceReporter
+  - Valuator
+  - EntityRanker
+  - PatriarchRelay
+logs:
+  - p_and_l_log.json
+  - balance_sheet_log.json
+  - performance_log.json
+  - valuation_estimates.json
+  - investor_packet_exports.json
+  - entity_rank_log.json
+config:
+  - valuation_methods.json
+  - benchmark_data.json
+  - risk_weight_matrix.json
+  - report_styles.json
+  - alerts_matrix.json
+  - snapshot_registry.json
+watchers:
+  - Ledger
+  - Solon
+  - Patriarch
+blessing_required: true

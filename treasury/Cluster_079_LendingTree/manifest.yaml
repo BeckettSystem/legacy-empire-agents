@@ -1,0 +1,22 @@
+cluster: Cluster_079_LendingTree
+division: Internal Lending & Borrower Ledger
+department: Finance, Treasury & Capital Deployment
+agents:
+  - LoanRequestor
+  - RepayTracker
+  - BorrowerArchive
+  - TermReporter
+  - PatriarchNotify
+logs:
+  - loan_requests.json
+  - repayment_log.json
+  - borrower_profiles.json
+  - unauthorized_attempts.json
+  - statement_exports.json
+config:
+  - thresholds.json
+watchers:
+  - Ledger
+  - Solon
+  - Patriarch
+blessing_required: true

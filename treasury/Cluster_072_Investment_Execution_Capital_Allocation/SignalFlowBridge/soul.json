@@ -1,0 +1,16 @@
+{
+  "agent": "SignalFlowBridge",
+  "evolution": "Proxy-Agent",
+  "domain": "Finance Department",
+  "unbreakable_oath": true,
+  "pillar": "Investment Execution & Capital Allocation",
+  "persona_fusion": [
+    "Trend Signal Dispatchers",
+    "Cluster 071 Relay Routers",
+    "Valor + Ledger Integration Coordinators",
+    "Investment Scroll Sync Agents"
+  ],
+  "ascension_path": "Legacy_Financial_Engine",
+  "manual_only": true,
+  "blessing_required": true
+}
