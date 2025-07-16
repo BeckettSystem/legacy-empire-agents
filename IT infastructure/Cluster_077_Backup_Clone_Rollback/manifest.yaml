@@ -1,0 +1,18 @@
+cluster: Cluster_077_Backup_Clone_Rollback
+division: IT Infrastructure & Resilience
+agents:
+  - ChronoMirror
+  - RollbackRanger
+  - CloneCaster
+triggers:
+  - backup_schedule
+  - rollback_command
+  - clone_request
+logs:
+  - snapshot_log.json
+  - rollback_log.json
+  - clone_activity_log.json
+watchers:
+  - Valor
+  - Atlas Prime
+  - Forge
