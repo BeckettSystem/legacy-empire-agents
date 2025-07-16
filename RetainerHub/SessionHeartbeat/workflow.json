@@ -1,0 +1,25 @@
+{
+  "name": "SessionHeartbeat Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "sessionheartbeat-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SessionHeartbeat Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { hub_status: \"Ready\", agent: \"SessionHeartbeat\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SessionHeartbeat Processor"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "PipelineMover_Workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ProcessLead",
+            "type": "function"
+        },
+        {
+            "name": "LogEvent",
+            "type": "log"
+        },
+        {
+            "name": "End",
+            "type": "success"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ProcessLead"
+        ],
+        "ProcessLead": [
+            "LogEvent"
+        ],
+        "LogEvent": [
+            "End"
+        ]
+    }
+}

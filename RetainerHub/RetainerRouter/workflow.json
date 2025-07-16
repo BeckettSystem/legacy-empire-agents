@@ -1,0 +1,25 @@
+{
+  "name": "RetainerRouter Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "retainerrouter-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "RetainerRouter Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { hub_status: \"Ready\", agent: \"RetainerRouter\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "RetainerRouter Processor"
+    ]
+  }
+}

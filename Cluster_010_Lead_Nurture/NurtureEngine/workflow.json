@@ -1,0 +1,32 @@
+{
+    "name": "NurtureEngine_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ProcessLead",
+            "type": "function"
+        },
+        {
+            "name": "ScoreOrStore",
+            "type": "function"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ProcessLead"
+        ],
+        "ProcessLead": [
+            "ScoreOrStore"
+        ],
+        "ScoreOrStore": [
+            "Complete"
+        ]
+    }
+}

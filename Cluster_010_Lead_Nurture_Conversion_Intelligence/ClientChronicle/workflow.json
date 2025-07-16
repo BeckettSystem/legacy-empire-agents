@@ -1,0 +1,32 @@
+{
+    "name": "ClientChronicle_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "CheckBehavior",
+            "type": "function"
+        },
+        {
+            "name": "TriggerFollowup",
+            "type": "function"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "CheckBehavior"
+        ],
+        "CheckBehavior": [
+            "TriggerFollowup"
+        ],
+        "TriggerFollowup": [
+            "Complete"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "agent": "RetainerRouter",
+  "evolution": "Retainer-Core",
+  "domain": "Systemwide Legal Retainer Control",
+  "unbreakable_oath": true,
+  "pillar": "Legal Access & Billing Hub",
+  "persona_fusion": [
+    "Session Routing Coordinators",
+    "Client Queue Dispatchers",
+    "Scroll Entry Point Analysts",
+    "Inter-Agent Pathway Managers"
+  ],
+  "ascension_path": "Central Governance Layer",
+  "manual_only": true,
+  "blessing_required": true
+}

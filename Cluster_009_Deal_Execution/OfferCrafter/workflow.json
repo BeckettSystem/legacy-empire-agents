@@ -1,0 +1,32 @@
+{
+    "name": "OfferCrafter_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ExecuteTask",
+            "type": "function"
+        },
+        {
+            "name": "LogResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ExecuteTask"
+        ],
+        "ExecuteTask": [
+            "LogResult"
+        ],
+        "LogResult": [
+            "Complete"
+        ]
+    }
+}

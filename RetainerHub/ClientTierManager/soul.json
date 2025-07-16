@@ -1,0 +1,16 @@
+{
+  "agent": "ClientTierManager",
+  "evolution": "Retainer-Core",
+  "domain": "Systemwide Legal Retainer Control",
+  "unbreakable_oath": true,
+  "pillar": "Legal Access & Billing Hub",
+  "persona_fusion": [
+    "Billing Tier Managers",
+    "Access Plan Monitors",
+    "Session Cap Enforcers",
+    "Scroll Scope Controllers"
+  ],
+  "ascension_path": "Central Governance Layer",
+  "manual_only": true,
+  "blessing_required": true
+}
