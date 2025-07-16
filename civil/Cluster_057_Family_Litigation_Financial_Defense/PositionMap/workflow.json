@@ -1,0 +1,25 @@
+{
+  "name": "PositionMap Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "positionmap-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PositionMap Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet tiers = [\"Do Not Offer\", \"Low Anchor\", \"Preferred\", \"High Concession\"];\nreturn { settlement_positions: tiers, risk_fallback: \"Trial Ready\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PositionMap Processor"
+    ]
+  }
+}

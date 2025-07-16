@@ -1,0 +1,25 @@
+{
+  "name": "PrenupForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "prenupforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PrenupForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst doc = $json.prenup || '';\nlet issues = [];\nif (!doc.includes(\"full disclosure\")) issues.push(\"Missing asset disclosure clause\");\nif (doc.includes(\"unilateral control\")) issues.push(\"Power imbalance risk\");\nreturn { prenup_flags: issues, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PrenupForge Processor"
+    ]
+  }
+}

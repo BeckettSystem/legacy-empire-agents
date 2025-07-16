@@ -1,0 +1,25 @@
+{
+  "name": "LitigationReady Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "litigationready-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LitigationReady Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  prepared_docs: [\"Discovery Index\", \"Income Ledger\", \"Child Schedule\", \"Declaration Set\"],\n  delivery_target: \"Legal Counsel\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LitigationReady Processor"
+    ]
+  }
+}

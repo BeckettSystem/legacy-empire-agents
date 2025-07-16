@@ -1,0 +1,25 @@
+{
+  "name": "ReputationShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "reputationshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ReputationShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"ReputationShield\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ReputationShield Processor"
+    ]
+  }
+}

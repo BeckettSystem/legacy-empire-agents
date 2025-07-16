@@ -1,0 +1,25 @@
+{
+  "name": "SuitReadyForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "suitreadyforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SuitReadyForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"SuitReadyForge\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SuitReadyForge Processor"
+    ]
+  }
+}

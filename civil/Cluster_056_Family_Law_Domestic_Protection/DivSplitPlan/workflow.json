@@ -1,0 +1,25 @@
+{
+  "name": "DivSplitPlan Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "divsplitplan-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DivSplitPlan Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet equity = $json.shared_assets || 0;\nlet split = equity * 0.5;\nreturn { projected_split: split, custody_impact: \"Shared risk\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DivSplitPlan Processor"
+    ]
+  }
+}

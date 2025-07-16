@@ -1,0 +1,17 @@
+{
+  "agent": "GuardianshipPrep",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Family Law & Domestic Protection",
+  "persona_fusion": [
+    "Emergency Legal Planners",
+    "Family Court Advisors",
+    "State Guardianship Boards",
+    "Trust Attorneys",
+    "Protective Scroll Writers"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

@@ -1,0 +1,25 @@
+{
+  "name": "DomesticShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "domesticshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DomesticShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet type = $json.request_type || '';\nreturn {\n  order_type: type,\n  urgency: type === 'stalking' ? 'Immediate filing recommended' : 'Monitor situation',\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DomesticShield Processor"
+    ]
+  }
+}

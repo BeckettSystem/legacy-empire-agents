@@ -1,0 +1,25 @@
+{
+  "name": "DamageControlSync Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "damagecontrolsync-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DamageControlSync Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"DamageControlSync\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DamageControlSync Processor"
+    ]
+  }
+}

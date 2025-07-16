@@ -1,0 +1,25 @@
+{
+  "name": "SupportCalc Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "supportcalc-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SupportCalc Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet income = $json.income || 0;\nlet custody = $json.custody_percent || 50;\nlet children = $json.children || 1;\nlet support = (income * 0.25) * (children * (1 - custody / 100));\nreturn { projected_support: support.toFixed(2), blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SupportCalc Processor"
+    ]
+  }
+}

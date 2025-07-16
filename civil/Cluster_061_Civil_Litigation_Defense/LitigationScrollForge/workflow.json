@@ -1,0 +1,25 @@
+{
+  "name": "LitigationScrollForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "litigationscrollforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LitigationScrollForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"LitigationScrollForge\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LitigationScrollForge Processor"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "DisputeBarrier Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "disputebarrier-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DisputeBarrier Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_active: true, agent: \"DisputeBarrier\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DisputeBarrier Processor"
+    ]
+  }
+}

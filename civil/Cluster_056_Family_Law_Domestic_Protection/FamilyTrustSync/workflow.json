@@ -1,0 +1,25 @@
+{
+  "name": "FamilyTrustSync Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "familytrustsync-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "FamilyTrustSync Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  updated_beneficiaries: $json.members || ['None'],\n  relationship_map: $json.relations || {},\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "FamilyTrustSync Processor"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "GuardianshipPrep Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "guardianshipprep-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "GuardianshipPrep Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  emergency_guardians: $json.nominees || ['TBD'],\n  jurisdiction: $json.state || 'GA',\n  scroll_type: \"Emergency Guardian Scroll\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "GuardianshipPrep Processor"
+    ]
+  }
+}

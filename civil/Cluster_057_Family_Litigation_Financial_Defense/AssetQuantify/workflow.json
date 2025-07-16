@@ -1,0 +1,25 @@
+{
+  "name": "AssetQuantify Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "assetquantify-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "AssetQuantify Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst holdings = $json.holdings || {};\nlet total = Object.values(holdings).reduce((sum, val) => sum + val, 0);\nreturn { total_assets: total, ledger: holdings, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "AssetQuantify Processor"
+    ]
+  }
+}
