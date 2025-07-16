@@ -1,0 +1,32 @@
+{
+    "name": "FollowUpDialer_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "ExecuteCallLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogCallResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "ExecuteCallLogic"
+        ],
+        "ExecuteCallLogic": [
+            "LogCallResult"
+        ],
+        "LogCallResult": [
+            "Complete"
+        ]
+    }
+}

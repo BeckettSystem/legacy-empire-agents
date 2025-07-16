@@ -1,0 +1,32 @@
+{
+    "name": "ReputationSync_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "EvaluateCapitalMatch",
+            "type": "function"
+        },
+        {
+            "name": "LogCapitalResult",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "EvaluateCapitalMatch"
+        ],
+        "EvaluateCapitalMatch": [
+            "LogCapitalResult"
+        ],
+        "LogCapitalResult": [
+            "Complete"
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "CapRateEngine_workflow",
+    "nodes": [
+        {
+            "name": "Start",
+            "type": "trigger"
+        },
+        {
+            "name": "RunPortfolioLogic",
+            "type": "function"
+        },
+        {
+            "name": "LogNarrative",
+            "type": "log"
+        },
+        {
+            "name": "Complete",
+            "type": "end"
+        }
+    ],
+    "connections": {
+        "Start": [
+            "RunPortfolioLogic"
+        ],
+        "RunPortfolioLogic": [
+            "LogNarrative"
+        ],
+        "LogNarrative": [
+            "Complete"
+        ]
+    }
+}
