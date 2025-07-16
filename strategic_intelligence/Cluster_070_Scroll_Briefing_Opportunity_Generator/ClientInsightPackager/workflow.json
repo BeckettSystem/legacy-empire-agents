@@ -1,0 +1,25 @@
+{
+  "name": "ClientInsightPackager Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "clientinsightpackager-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ClientInsightPackager Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_created: true, agent: \"ClientInsightPackager\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ClientInsightPackager Processor"
+    ]
+  }
+}

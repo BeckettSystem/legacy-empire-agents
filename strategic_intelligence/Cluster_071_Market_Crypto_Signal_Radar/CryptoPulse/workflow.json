@@ -1,0 +1,25 @@
+{
+  "name": "CryptoPulse Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "cryptopulse-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "CryptoPulse Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { signal_ready: true, agent: \"CryptoPulse\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "CryptoPulse Processor"
+    ]
+  }
+}

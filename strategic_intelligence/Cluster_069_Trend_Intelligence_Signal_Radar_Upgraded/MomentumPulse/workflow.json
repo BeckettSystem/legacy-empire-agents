@@ -1,0 +1,25 @@
+{
+  "name": "MomentumPulse Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "momentumpulse-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "MomentumPulse Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet signal_freq = $json.signal_frequency || {};\nlet ranked = Object.entries(signal_freq).sort((a,b)=>b[1]-a[1]).slice(0,5);\nreturn {\n  top_trending_signals: ranked,\n  scroll_trigger_ready: true,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "MomentumPulse Processor"
+    ]
+  }
+}

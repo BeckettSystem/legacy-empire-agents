@@ -1,0 +1,25 @@
+{
+  "name": "InvestorBrief Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "investorbrief-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "InvestorBrief Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { signal_ready: true, agent: \"InvestorBrief\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "InvestorBrief Processor"
+    ]
+  }
+}

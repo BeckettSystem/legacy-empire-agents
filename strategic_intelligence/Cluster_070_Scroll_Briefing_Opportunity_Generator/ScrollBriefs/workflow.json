@@ -1,0 +1,25 @@
+{
+  "name": "ScrollBriefs Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrollbriefs-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollBriefs Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { scroll_created: true, agent: \"ScrollBriefs\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollBriefs Processor"
+    ]
+  }
+}

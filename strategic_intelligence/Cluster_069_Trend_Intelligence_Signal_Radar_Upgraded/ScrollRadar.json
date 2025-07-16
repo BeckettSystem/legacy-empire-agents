@@ -1,0 +1,36 @@
+{
+  "dashboard_name": "ScrollRadar \u2013 Real-Time Intelligence Feed",
+  "feeds": [
+    {
+      "topic": "AI",
+      "source": "https://techcrunch.com/feed"
+    },
+    {
+      "topic": "Biotech",
+      "source": "https://www.fiercebiotech.com/rss"
+    },
+    {
+      "topic": "FinTech",
+      "source": "https://www.finextra.com/rss"
+    },
+    {
+      "topic": "Startups",
+      "source": "https://venturebeat.com/feed"
+    },
+    {
+      "topic": "PropTech",
+      "source": "https://www.housingwire.com/rss"
+    }
+  ],
+  "metrics_tracked": [
+    "Signal Frequency",
+    "Scroll Trigger Events",
+    "Momentum Score",
+    "Theme Clustering"
+  ],
+  "linked_clusters": [
+    "Cluster_070",
+    "RetainerHub",
+    "Observer"
+  ]
+}

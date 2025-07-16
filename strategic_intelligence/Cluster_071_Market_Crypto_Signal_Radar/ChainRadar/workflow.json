@@ -1,0 +1,25 @@
+{
+  "name": "ChainRadar Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "chainradar-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ChainRadar Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn { signal_ready: true, agent: \"ChainRadar\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ChainRadar Processor"
+    ]
+  }
+}

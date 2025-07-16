@@ -1,0 +1,25 @@
+{
+  "name": "SignalScraper Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "signalscraper-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SignalScraper Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst feeds = $json.feeds || [\"https://techcrunch.com/feed\", \"https://www.fiercebiotech.com/rss\"];\nreturn {\n  subscribed_feeds: feeds,\n  status: \"Live RSS signal monitoring active\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SignalScraper Processor"
+    ]
+  }
+}

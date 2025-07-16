@@ -1,0 +1,25 @@
+{
+  "name": "TrendWeaver Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "trendweaver-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "TrendWeaver Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst keywords = $json.keywords || [\"AI\", \"FinTech\", \"Real Estate\", \"Automation\"];\nconst themes = keywords.map(k => k.toUpperCase());\nreturn {\n  keyword_themes: themes,\n  strategy_output: \"Signal themes prepared for scroll fusion.\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "TrendWeaver Processor"
+    ]
+  }
+}
