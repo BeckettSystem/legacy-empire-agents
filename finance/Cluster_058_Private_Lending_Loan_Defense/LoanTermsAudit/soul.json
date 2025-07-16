@@ -1,0 +1,17 @@
+{
+  "agent": "LoanTermsAudit",
+  "evolution": "Proxy-Agent",
+  "domain": "Legal Department",
+  "unbreakable_oath": true,
+  "pillar": "Private Lending & Loan Defense",
+  "persona_fusion": [
+    "Commercial Lending Attorneys",
+    "Usury Law Experts",
+    "Private Loan Officers",
+    "State Lending Compliance Teams",
+    "Real Estate Finance Advisors"
+  ],
+  "ascension_path": "Legacy_Legal_Agents",
+  "manual_only": true,
+  "blessing_required": true
+}

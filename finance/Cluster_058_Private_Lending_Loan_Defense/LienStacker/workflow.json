@@ -1,0 +1,25 @@
+{
+  "name": "LienStacker Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "lienstacker-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LienStacker Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst liens = $json.liens || [];\nlet top_position = liens.length > 0 ? liens[0] : \"None\";\nreturn { senior_lien: top_position, total_liens: liens.length, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LienStacker Processor"
+    ]
+  }
+}

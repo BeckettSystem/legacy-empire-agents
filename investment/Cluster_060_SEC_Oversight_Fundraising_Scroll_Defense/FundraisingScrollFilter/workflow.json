@@ -1,0 +1,25 @@
+{
+  "name": "FundraisingScrollFilter Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "fundraisingscrollfilter-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "FundraisingScrollFilter Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst funnel = $json.cta_flow || '';\nlet flags = funnel.includes(\"click here to invest\") || funnel.includes(\"secure your equity\");\nreturn { scroll_cta_violation: flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "FundraisingScrollFilter Processor"
+    ]
+  }
+}

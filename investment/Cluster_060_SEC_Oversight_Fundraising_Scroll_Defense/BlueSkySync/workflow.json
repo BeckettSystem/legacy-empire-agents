@@ -1,0 +1,25 @@
+{
+  "name": "BlueSkySync Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "blueskysync-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "BlueSkySync Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst state = $json.state || '';\nlet exempt = [\"GA\", \"TX\", \"FL\"].includes(state);\nreturn { state: state, filing_required: !exempt, exemption_status: exempt ? \"Self-exempting\" : \"Notice required\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "BlueSkySync Processor"
+    ]
+  }
+}

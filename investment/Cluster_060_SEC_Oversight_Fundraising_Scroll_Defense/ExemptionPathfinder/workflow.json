@@ -1,0 +1,25 @@
+{
+  "name": "ExemptionPathfinder Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "exemptionpathfinder-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ExemptionPathfinder Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet raise = $json.amount || 0;\nlet path = raise < 500000 ? \"Reg CF\" : raise < 5000000 ? \"Reg D 506(b)\" : \"Reg D 506(c)\";\nreturn { recommended_exemption: path, filing_notes: \"Verify state-level compliance\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ExemptionPathfinder Processor"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "ScrollLock Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "scrolllock-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "ScrollLock Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet scroll = $json.scroll_id || \"unknown\";\nreturn { scroll_id: scroll, status: \"LOCKED\", message: \"Scroll blocked due to compliance risk. Blessing required to re-enable.\", blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "ScrollLock Processor"
+    ]
+  }
+}

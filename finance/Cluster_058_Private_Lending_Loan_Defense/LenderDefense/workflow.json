@@ -1,0 +1,25 @@
+{
+  "name": "LenderDefense Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "lenderdefense-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LenderDefense Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet claim = $json.claim || '';\nreturn {\n  defense_ready: true,\n  strategy_memo: `Scroll drafted to respond to claim: ${claim}`,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LenderDefense Processor"
+    ]
+  }
+}

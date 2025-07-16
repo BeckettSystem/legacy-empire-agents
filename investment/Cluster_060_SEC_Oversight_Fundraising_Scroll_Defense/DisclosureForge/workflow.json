@@ -1,0 +1,25 @@
+{
+  "name": "DisclosureForge Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "disclosureforge-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "DisclosureForge Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  standard_disclaimers: [\n    \"This is not an offer to sell or a solicitation to buy securities.\",\n    \"All investments involve risk, including loss of principal.\",\n    \"Past performance is not indicative of future results.\"\n  ],\n  scroll_injection_ready: true,\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "DisclosureForge Processor"
+    ]
+  }
+}

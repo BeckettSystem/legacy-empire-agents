@@ -1,0 +1,25 @@
+{
+  "name": "SECLanguageScan Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "seclanguagescan-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "SECLanguageScan Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst scroll = $json.scroll || '';\nlet flagged = scroll.includes(\"guaranteed return\") || scroll.includes(\"secure investment\");\nreturn { language_flags: flagged ? [\"Misleading offer language\"] : [], blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "SECLanguageScan Processor"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "NoteBuilder Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "notebuilder-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "NoteBuilder Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nreturn {\n  note_template: {\n    principal: \"$[amount]\",\n    rate: \"$[rate]\",\n    term: \"$[term_months] months\",\n    collateral: \"$[secured_by]\",\n    jurisdiction: \"$[state]\"\n  },\n  scroll_format: \"Note scroll prepared. Ready for population and execution.\",\n  blessing: true\n};"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "NoteBuilder Processor"
+    ]
+  }
+}

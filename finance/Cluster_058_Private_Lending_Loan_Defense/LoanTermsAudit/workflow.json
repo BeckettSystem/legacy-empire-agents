@@ -1,0 +1,25 @@
+{
+  "name": "LoanTermsAudit Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "loantermsaudit-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "LoanTermsAudit Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst rate = $json.interest_rate || 0;\nlet usury_violation = rate > 18 ? \"Exceeds threshold\" : \"Compliant\";\nreturn { usury_status: usury_violation, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "LoanTermsAudit Processor"
+    ]
+  }
+}

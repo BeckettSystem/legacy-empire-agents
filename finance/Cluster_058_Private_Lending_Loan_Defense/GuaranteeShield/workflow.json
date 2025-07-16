@@ -1,0 +1,25 @@
+{
+  "name": "GuaranteeShield Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "guaranteeshield-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "GuaranteeShield Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nconst pg = $json.guarantee_text || '';\nlet flags = pg.includes(\"joint and several\") ? [\"Unlimited risk\"] : [];\nreturn { guarantee_flags: flags, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "GuaranteeShield Processor"
+    ]
+  }
+}

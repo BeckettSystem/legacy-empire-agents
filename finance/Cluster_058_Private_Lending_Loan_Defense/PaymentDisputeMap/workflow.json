@@ -1,0 +1,25 @@
+{
+  "name": "PaymentDisputeMap Workflow",
+  "nodes": [
+    {
+      "name": "Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "paymentdisputemap-check",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "PaymentDisputeMap Processor",
+      "type": "n8n-nodes-base.function",
+      "parameters": {
+        "functionCode": "if (!$json.blessing) throw new Error(\"Patriarch blessing required.\");\nlet missed = $json.missed_payments || 0;\nlet outcome = missed >= 3 ? \"Legal exposure rising\" : \"Negotiate quietly\";\nreturn { risk_profile: outcome, blessing: true };"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": [
+      "PaymentDisputeMap Processor"
+    ]
+  }
+}
